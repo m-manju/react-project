@@ -54,7 +54,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.submitButton, .LogoutButton{
+.submitButton, .LogoutButtonton {
   width: 100%;
   text-align: center;
   padding: 10px;
@@ -67,62 +67,67 @@ body {
 .formClass .submitButton:hover {
   background-color: #845905;
 }
-
-footer{
+.footer {
   background-color: #333;
+  color: #fff;
+  padding: 10px;
+  margin-top: 206px;
+  position: relative;
 }
-.footercls{
+.footer-top {
   display: flex;
-  padding: 10px 0;
-  margin-top: 70px;
-  justify-content: space-evenly;
-  gap: 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
-footer h3{
-  padding-bottom: 10px;
+.footer-nav h3 {
+  margin-bottom: 10px;
 }
-footer h3 , footer h5{
-  color: #f3f7f9;
-  font-family: Arial, Helvetica, sans-serif;
-}
-footer h5{
-  font-weight: 100;
-  font-size: 12px;
-  width: 300px;
-}
-footer li{
+.footer-nav ul {
   list-style: none;
-  color: #f3f7f9;
-  padding: 6px 0;
-}footer li:first-child {
   padding: 0;
 }
-footer .footer-h4{
-  font-size: 14px;
-  text-align: center;
-  font-family: sans-serif;
-  font-weight: 700;
-  color: #fff;
-  padding: 0 0 0px 0;
-}
-footer ul li a{
-  text-decoration: none;
-  color: #f3f7f9;
+.footer-nav li {
+  margin-bottom: 5px;
   font-size: 12px;
 }
-footer ul li a:hover{
-  font-size: 14px;
+.footer-nav a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-nav a:hover {
   text-decoration: underline;
 }
-.footerIcons a{
+.footer-contact h3 {
+  margin-bottom: 10px;
+}
+.footer-contact p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+.footer-social h3 {
+  margin-bottom: 10px;
+}
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-social li {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.footer-social a {
   text-decoration: none;
+  color: #fff;
 }
-.fab{
-  color: #f3f7f9;
-  font-size: 24px;
-  padding: 20px 15px 0 0;
+.footer-social a:hover {
+  text-decoration: underline;
 }
-.fab:hover{
-  color: #d0d5d7;
-  font-size: 24px;
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  margin: 0;
+  font-size: 12px;
 }
