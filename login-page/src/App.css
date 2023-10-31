@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  background-color: antiquewhite;
+  font-family: Arial, sans-serif;
+}
+.header {
+  background-color: #9a8f4f;
+  color: #fff;
+  padding: 5px 0;
+  text-align: center;
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 0px 80px;
+}
+.caption p{
+  font-size: 12px;
+  color: #fff;
+  padding: 0px 30px;
+}
+.formDiv {
+  width: 340px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: relative;
+  margin-top: 80px;
+}
+.formDiv h3 {
+  text-align: center;
+}
+.formClass {
+  display: flex;
+  flex-direction: column;
+}
+.formClass label {
+  margin-bottom: 5px;
+  color: #333;
+}
+.formClass input[type="text"],
+.formClass input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.submitButton, .LogoutButton{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #9e8149;
+  color: #fff;
+  cursor: pointer;
+}
+.formClass .submitButton:hover {
+  background-color: #845905;
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  margin-top: 85px;
+  position: relative;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.footer-nav h3 {
+  margin-bottom: 10px;
+}
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-nav li {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.footer-nav a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+.footer-contact h3 {
+  margin-bottom: 10px;
+}
+.footer-contact p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+.footer-social h3 {
+  margin-bottom: 10px;
+}
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-social li {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.footer-social a {
+  text-decoration: none;
+  color: #fff;
+}
+.footer-social a:hover {
+  text-decoration: underline;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  margin: 0;
+  font-size: 12px;
+}
