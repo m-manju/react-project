@@ -54,7 +54,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.submitButton, .LogoutButtonton {
+.submitButton, .LogoutButton {
   width: 100%;
   text-align: center;
   padding: 10px;
