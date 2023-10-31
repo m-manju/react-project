@@ -8,7 +8,7 @@ const Home: React.FC = () => {
       <Header />
       <h2>Home</h2>
       <br/>
-      <Link to="/Login" className='LogoutButton'>Log Out</Link>
+      <Link to="/" className='LogoutButton'>Log Out</Link>
     </>
   );
 }
