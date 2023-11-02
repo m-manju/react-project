@@ -1,29 +1,24 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import validation from '../LoginValidation';
-import axios from 'axios'
-import {Link} from 'react-router-dom'
-
+import Header from './header';
+import Footer from './footer';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
-  Username: string;
-  className: string;
+  username: string;
   password: string;
 }
 
 interface ErrorValues {
-  Username: string;
+  username: string;
   password: string;
 }
 
 const Login: React.FC = () => {
-  const [values, setValues] = useState<FormValues>({
-    Username: '',
-    className: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState<ErrorValues>({ Username: '', password: '' });
+  const navigate = useNavigate();
+
+  const [values, setValues] = useState<FormValues>({ username: '', password: ''});
+  const [errors, setErrors] = useState<ErrorValues>({username: '',password: ''});
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
@@ -31,13 +26,33 @@ const Login: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const validationErrors = validation(values);
-    setErrors(validationErrors);
-    if(errors.Username ==="" && errors.password === ""){
+
+    if (values.username.trim() === '') {
+      setErrors(prevErrors => ({ ...prevErrors, username: 'Username is required' }));
+    } else {
+      setErrors(prevErrors => ({ ...prevErrors, username: '' }));
+    }
+
+    if (values.password.length < 1) {
+      setErrors(prevErrors => ({ ...prevErrors, password: 'Password is required' }));
+    } else {
+      setErrors(prevErrors => ({ ...prevErrors, password: '' }));
+    }
+
+    if (values.username.trim() !== '' && values.password.length >= 1) {
       axios.post('http://localhost:3001/auth/login', values)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    } 
+        .then(res => {
+          console.log(res);
+          if (res.data.success) {
+            localStorage.setItem('token', res.data.token);
+            navigate('/');
+            console.log('stored in local storage')
+          } else {
+            console.log('Login failed');
+          }
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   return (
@@ -46,21 +61,20 @@ const Login: React.FC = () => {
       <div className='formDiv'>
         <h3>Login here</h3>
         <form className='formClass' action='' onSubmit={handleSubmit}>
-          <label id="name">Username: </label>
-          <input type="text" id="name" name="Username" onChange={handleInput}/>
-          {errors.Username && <span>{errors.Username}</span>}
-          <br/>
-          <label id="password">Password : </label>
-          <input type="password" id="password" name="password" onChange={handleInput}/>
+          <label htmlFor="name">Username: </label>
+          <input type="text" id="name" name="username" onChange={handleInput} />
+          {errors.username && <span>{errors.username}</span>}
+          <br />
+          <label htmlFor="password">Password: </label>
+          <input type="password" id="password" name="password" onChange={handleInput} />
           {errors.password && <span>{errors.password}</span>}
-          <br/>
-          <Link to="/Home" type="submit" className='submitButton'>Login</Link>
+          <br />
+          <button type="submit" className='submitButton'>Login</button>
         </form>
       </div>
       <Footer />
     </div>
   );
-}
-
+};
 
 export default Login;

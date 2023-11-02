@@ -54,8 +54,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.submitButton, .LogoutButton {
-  width: 100%;
+Button {
   text-align: center;
   padding: 10px;
   border: none;
@@ -63,6 +62,12 @@ body {
   background-color: #9e8149;
   color: #fff;
   cursor: pointer;
+}
+.LogoutButton{
+  width: 140px;
+}
+.submitButton{
+  width: 100%;
 }
 .formClass .submitButton:hover {
   background-color: #845905;
