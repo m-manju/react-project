@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import Header from './header';
-import Footer from './footer';
+import Header from './Header';
+import Footer from './Footer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,19 +20,18 @@ const Login: React.FC = () => {
   const [values, setValues] = useState<FormValues>({ username: '', password: ''});
   const [errors, setErrors] = useState<ErrorValues>({username: '',password: ''});
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) : void => {
     setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void  => {
     event.preventDefault();
-
     if (values.username.trim() === '') {
       setErrors(prevErrors => ({ ...prevErrors, username: 'Username is required' }));
     } else {
       setErrors(prevErrors => ({ ...prevErrors, username: '' }));
     }
-
+    
     if (values.password.length < 1) {
       setErrors(prevErrors => ({ ...prevErrors, password: 'Password is required' }));
     } else {
@@ -46,7 +45,7 @@ const Login: React.FC = () => {
           if (res.data.success) {
             localStorage.setItem('token', res.data.token);
             navigate('/');
-            console.log('stored in local storage')
+            console.log('stored in local storage', res.data.token)
           } else {
             console.log('Login failed');
           }
@@ -54,6 +53,7 @@ const Login: React.FC = () => {
         .catch(err => console.log(err));
     }
   };
+
 
   return (
     <div className="App">

@@ -1,7 +1,9 @@
 import React from 'react';
+import './../App.css';
 
 const Header: React.FC = () => {
   return (
+    <>
     <header>
     <div className="header">
       <div className="logo">EpicEntertain</div>
@@ -10,7 +12,9 @@ const Header: React.FC = () => {
       </div>
     </div>
     </header>
+    </>
   );
 }
 
 export default Header;
+
