@@ -25,6 +25,38 @@ body {
   color: #fff;
   padding: 0px 30px;
 }
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+nav ul li {
+  margin-left: 50px;
+}
+nav ul li a {
+  text-decoration: none;
+  color:#f3f2ed;
+  font-weight: bold;
+}
+nav ul li a:hover {
+  color:   #333; 
+}
+.LogoutButton{
+  width: 140px;
+  margin-right: 50px;
+  background-color:  #dde6bc;
+  color: #845905;
+  font-weight: bold;
+  font-size: 16px;
+}
+.LogoutButton:hover{
+  background-color:#f6fae7;
+}
 .formDiv {
   width: 340px;
   margin: 0 auto;
@@ -62,9 +94,6 @@ Button {
   background-color: #9e8149;
   color: #fff;
   cursor: pointer;
-}
-.LogoutButton{
-  width: 140px;
 }
 .submitButton{
   width: 100%;

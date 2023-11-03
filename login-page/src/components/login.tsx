@@ -31,7 +31,7 @@ const Login: React.FC = () => {
     } else {
       setErrors(prevErrors => ({ ...prevErrors, username: '' }));
     }
-    
+
     if (values.password.length < 1) {
       setErrors(prevErrors => ({ ...prevErrors, password: 'Password is required' }));
     } else {
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="App">
-      <Header />
+      <Header showNavigation={false}/>
       <div className='formDiv'>
         <h3>Login here</h3>
         <form className='formClass' action='' onSubmit={handleSubmit}>
