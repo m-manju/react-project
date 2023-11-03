@@ -6,24 +6,25 @@ body {
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
-  background-color: antiquewhite;
+  background-color: rgb(231, 240, 252);
   font-family: Arial, sans-serif;
 }
 .header {
-  background-color: #9a8f4f;
+  background-color: #87427b;
   color: #fff;
-  padding: 5px 0;
+  padding: 10px 0 0 0;
   text-align: center;
 }
 .logo {
-  font-size: 22px;
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   padding: 0px 80px;
 }
-.caption p{
+.caption{
   font-size: 12px;
   color: #fff;
-  padding: 0px 30px;
+  padding: 0 30px;
 }
 nav{
   display: flex;
@@ -36,26 +37,36 @@ nav ul {
   display: flex;
 }
 nav ul li {
-  margin-left: 50px;
+  margin-left: 15px;
+  width: 80px;
+  background-color: #ddc2d8;
+  padding: 2px; 
 }
 nav ul li a {
   text-decoration: none;
-  color:#f3f2ed;
+  color:#8b1683;
   font-weight: bold;
 }
-nav ul li a:hover {
-  color:   #333; 
+nav ul li:hover { 
+  background-color: #f1cfec;
 }
 .LogoutButton{
-  width: 140px;
-  margin-right: 50px;
+  width: 80px;
+  margin-right: 25px;
   background-color:  #dde6bc;
-  color: #845905;
+  padding: 6px;
+  color: #87427b;
   font-weight: bold;
   font-size: 16px;
 }
 .LogoutButton:hover{
   background-color:#f6fae7;
+}
+.welcome{
+  color: rgb(241, 232, 232);
+  font-size: 18px;
+  margin: 0; padding: 5px;
+  background-color: #cfa6d1;
 }
 .formDiv {
   width: 340px;
@@ -90,22 +101,27 @@ Button {
   text-align: center;
   padding: 10px;
   border: none;
-  border-radius: 3px;
-  background-color: #9e8149;
+  border-radius: 20px;
+  background-color: #83587b;
   color: #fff;
   cursor: pointer;
 }
 .submitButton{
   width: 100%;
 }
+span{
+  font-size: 13px;
+  color: red;
+}
 .formClass .submitButton:hover {
-  background-color: #845905;
+  background-color: #cfa6d1;
+  color: black;
 }
 .footer {
   background-color: #333;
   color: #fff;
   padding: 10px;
-  margin-top: 206px;
+  margin-top: 155px;
   position: relative;
 }
 .footer-top {

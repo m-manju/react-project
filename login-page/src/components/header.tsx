@@ -9,13 +9,13 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username'); 
   
   useEffect(() => {
     if (!token) {
       navigate('/login');
     }
   }, [navigate, token]);
-
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -27,19 +27,26 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
     <>
       <header>
         <div className="header">
-          <div className="logo">EpicEntertain</div>
-          <div className="caption">
-            <p>Empowering Knowledge, One Page at a Time!!</p>
+          <div >
+            <div className="logo">EpicEntertain</div>
+            <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
           </div>
           
           {showNavigation && (
+            <>
             <nav>
               <ul>
                 <li><Link to="/">Home</Link></li>
+                <li><Link to="/">About</Link></li>
+                <li><Link to="/">Features</Link></li>
                 <li><Link to="/">Contacts</Link></li>
               </ul>
-               <button  className='LogoutButton' onClick={handleLogout}>Log Out</button>
+              <button  className='LogoutButton' onClick={handleLogout}>Log Out</button>
             </nav>
+            <div>
+              {username && <h2 className='welcome'>Welcome, {username}!!</h2>} 
+            </div>
+            </>
           )}
         </div>
       </header>

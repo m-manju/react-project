@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link} from 'react-router-dom';
 
 interface FormValues {
   username: string;
@@ -26,6 +26,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void  => {
     event.preventDefault();
+
     if (values.username.trim() === '') {
       setErrors(prevErrors => ({ ...prevErrors, username: 'Username is required' }));
     } else {
@@ -44,13 +45,22 @@ const Login: React.FC = () => {
           console.log(res);
           if (res.data.success) {
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('username', res.data.username);
             navigate('/');
             console.log('stored in local storage', res.data.token)
           } else {
             console.log('Login failed');
           }
         })
-        .catch(err => console.log(err));
+        .catch(err =>  {
+          if (err.response && err.response.status === 401) {
+            setErrors(prevErrors => ({ ...prevErrors, username: 'Please enter a valid Username ' }));
+          }else if (err.response && err.response.status === 409) {
+            setErrors(prevErrors => ({ ...prevErrors, password: 'Incorrect password' }));
+          }else {
+            console.log("Error:", err);
+          }
+        });
     }
   };
 
@@ -59,7 +69,7 @@ const Login: React.FC = () => {
     <div className="App">
       <Header showNavigation={false}/>
       <div className='formDiv'>
-        <h3>Login here</h3>
+        <h3>Login here!</h3>
         <form className='formClass' action='' onSubmit={handleSubmit}>
           <label htmlFor="name">Username: </label>
           <input type="text" id="name" name="username" onChange={handleInput} />
@@ -71,6 +81,7 @@ const Login: React.FC = () => {
           <br />
           <button type="submit" className='submitButton'>Login</button>
         </form>
+        <p>New to EpicEntertain? <Link to="/signup">Sign Up now</Link></p> 
       </div>
       <Footer />
     </div>
@@ -78,3 +89,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+
