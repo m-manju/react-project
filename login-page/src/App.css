@@ -109,6 +109,7 @@ Button {
 .submitButton{
   width: 100%;
 }
+
 span{
   font-size: 13px;
   color: red;
@@ -182,15 +183,7 @@ span{
   font-size: 12px;
 }
 
-
-/* ------------------- */
-.allBooks{
-  display: flex;
-  gap: 2px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-}
+/* ---------- books --------- */
 .bookBox{
   width: 200px;
   background-color: #87427b;
