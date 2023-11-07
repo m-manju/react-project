@@ -18,7 +18,6 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (token) {
       try {
         const decoded: UserDetails = jwtDecode(token) as UserDetails;
