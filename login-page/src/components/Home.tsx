@@ -1,5 +1,5 @@
 import React, { useEffect }  from 'react';
-import Header from '../components/Header';
+import Header from '../components/header';
 import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {

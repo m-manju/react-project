@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from './Header';
+import Header from './header';
 import Footer from './Footer';
 import './../App.css';
 
@@ -12,21 +12,17 @@ interface Book {
   description: string;
   isbn:number;
 }
-
 const Books: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/books/books')
-      .then(response => {
-        if (response.data && response.data.books) {
-          setBooks(response.data.books);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching books:', error);
-      });
-  }, []);
+useEffect(() => {
+  axios.get('http://localhost:3001/books/books')
+    .then(response => {
+      setBooks(response.data?.books || []);
+    })
+    .catch(error => {
+      console.error('Error fetching books:', error);
+    });
+}, []);
 
   return (
     <div>
