@@ -62,7 +62,7 @@ const Signup: React.FC = () => {
     <>
       <div className="formDiv">
         <h3>Signup here!</h3>
-        <form className='formClass' action='' onSubmit={handleSignup}>
+        <form className='formClass'  onSubmit={handleSignup}>
           <label>Username: </label>
           <input type="text" id="name" name="username" onChange={handleInput} />
           {errors.username && <span>{errors.username}</span>}
