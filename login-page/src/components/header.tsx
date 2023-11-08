@@ -24,7 +24,6 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
         setUserDetails(decoded);
       } catch (error) {
         console.error('Error in decoding the token:', error);
-        navigate('/login');
       }
     } else {
       navigate('/login');
