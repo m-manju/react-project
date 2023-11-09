@@ -25,9 +25,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
       } catch (error) {
         console.error('Error in decoding the token:', error);
       }
-    } else {
-      navigate('/login');
-    }
+    } 
   }, [navigate]);
 
   const handleLogout = () => {
@@ -39,23 +37,26 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
   return (
     <>
       <header>
-      <div className="header">
-          <div>
-            <div className="logo">EpicEntertain</div>
-            <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
+      <div className="main-header container">
+        <div className="top-section">
+          <div className="left-section">
+            <div className="logo-section">
+              <div className="logo">EpicEntertain</div>
+              <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
+            </div>
           </div>
-          {userDetails && (
-              <div>
-                <h2>Welcome, {userDetails.username}!</h2>
+            {userDetails && (
+              <div className="user-details">
+                <h2>Welcome {userDetails.username}!</h2>
                 <p>Email: {userDetails.email}</p>
-                <p>ID: {userDetails.id}</p>
               </div>
-          )}
+            )}
+        </div>
 
           {showNavigation && (
-            <>
+            <div className="bottom-section">
               <nav>
-                <ul>
+                <ul className="nav-list">
                   <li onClick={() => navigate('/')}>Home</li>
                   <li onClick={() => navigate('/')}>About</li>
                   <li onClick={() => navigate('/')}>Features</li>
@@ -63,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
                 </ul>
                 <button className='LogoutButton' onClick={handleLogout}>Log Out</button>
               </nav>
-            </>
+            </div>
           )}
         </div>
       </header>

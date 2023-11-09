@@ -1,72 +1,91 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0;
-  background-color: rgb(231, 240, 252);
   font-family: Arial, sans-serif;
 }
-.header {
-  background-color: #87427b;
-  color: #fff;
-  padding: 10px 0 0 0;
-  text-align: center;
+.container{
+    max-width: 1350px;
+    margin: 0 auto; 
+}
+.main-header {
+  padding: 10px 20px;
+}
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .logo {
   font-size: 24px;
-  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline;
   font-weight: bold;
-  padding: 0px 80px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.caption{
+.caption {
+  font-style: italic;
   font-size: 12px;
-  color: #fff;
-  padding: 0 30px;
+  margin: 5px 0;
+}
+.user-details {
+  padding: 8px;
+  border-radius: 8px;
+  border: #443886 2px solid;
+}
+.user-details h2{
+  font-size: 16px;
+}
+.user-details p {
+  font-size: 12px;
+}
+.bottom-section {
+  background-color: #dbd9eb;
+  border-radius: 25px;
+  margin-top: 20px;
 }
 nav{
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
-nav ul {
-  list-style: none;
+.nav-list {
+  list-style-type: none;
   padding: 0;
   display: flex;
 }
-nav ul li {
-  margin-left: 15px;
-  width: 80px;
-  background-color: #ddc2d8;
-  padding: 2px; 
+.nav-list li {
+  margin-right: 40px;
+  margin-left: 8px;
+  cursor: pointer;
 }
-nav ul li a {
-  text-decoration: none;
-  color:#8b1683;
-  font-weight: bold;
+.nav-list li:hover {
+  background-color: #443886;
+  color: #fff;
+  padding: 6px 20px;
+  border: none;
+  border-radius: 25px;
+  
 }
-nav ul li:hover { 
-  background-color: #f1cfec;
-}
-.LogoutButton{
-  width: 80px;
-  margin-right: 25px;
-  background-color:  #dde6bc;
-  padding: 6px;
-  color: #87427b;
-  font-weight: bold;
-  font-size: 16px;
+.LogoutButton {
+  background-color: #443886;
+  color: #fff;
+  padding: 8px 36px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }
 .LogoutButton:hover{
-  background-color:#f6fae7;
-}
-.welcome{
-  color: rgb(241, 232, 232);
-  font-size: 18px;
-  margin: 0; padding: 5px;
-  background-color: #cfa6d1;
+  background-color: #4b4084;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  padding: 8px 36px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }
 .formDiv {
   width: 340px;
@@ -80,6 +99,7 @@ nav ul li:hover {
 }
 .formDiv h3 {
   text-align: center;
+  margin-bottom: 20px;
 }
 .formClass {
   display: flex;
@@ -97,25 +117,37 @@ nav ul li:hover {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-Button {
+.submitButton{
+  width: 100%;
   text-align: center;
   padding: 10px;
   border: none;
   border-radius: 20px;
-  background-color: #83587b;
+  background-color: #4b4084;
   color: #fff;
   cursor: pointer;
+  margin-bottom: 15px;
+} 
+.btnLink{
+  border: none;
+  background-color: #f9f9f9;
+  color: #4b4084;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
 }
-.submitButton{
-  width: 100%;
+.btnLink:hover{
+  text-decoration: none;
 }
-
+.formDiv p{
+  font-size: 13px;
+}
 span{
   font-size: 13px;
   color: red;
 }
 .formClass .submitButton:hover {
-  background-color: #cfa6d1;
+  background-color: #aba1e1;
   color: black;
 }
 .footer {
@@ -182,15 +214,87 @@ span{
   margin: 0;
   font-size: 12px;
 }
-
-/* ---------- books --------- */
-.bookBox{
-  width: 200px;
-  background-color: #87427b;
-  color: #f9f9f9;
-  padding: 10px;
-  gap: 2px;
+/* ---------- home --------- */
+.homeTop{
   display: flex;
-  flex-direction: column;
-  margin: 2px;
+  align-items: center;
+  background-color: #4b4084;
+  margin-top: 30px;
+}
+.image-section{
+  flex: 1; 
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.image-section img {
+  max-width: 100%; 
+  height: auto;
+}
+.cntnt-section{
+  flex: 4;
+}
+.cntnt-section h2, .cntnt-section p{
+  color: white;
+}
+.cntnt-section button {
+  margin: 20px 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.cntnt-section button:hover {
+  background-color: rgb(219, 229, 239);
+}
+/* ---------- books --------- */
+.bookBox {
+  border: 1px solid #655858;
+  background-color: aliceblue;
+  padding: 20px;
+  margin: 20px;
+  align-items: center;
+}
+.addToCartBtn {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.allBooks{
+  background-color: #4b4084;
+}
+.allBooks h2{
+  padding: 20px;
+  color: rgb(248, 251, 254);
+}
+/* ---------- Sidebar --------- */
+.sidebar {
+  width: 250px;
+  background-color: #f3f3f3;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 125px;
+  bottom: 0; 
+  right: 0; 
+  overflow-y: auto; 
+}
+.sidebar ul{
+  padding: 10px 0;
+}
+.sidebar li{
+  list-style: none;
+  color: #235b80;
+  padding-top: 10px;
+}
+.sidebar p{
+  padding: 26px;
+}
+.cartBtn{
+  padding: 0 10px;
+  margin: 0 10px ;
 }

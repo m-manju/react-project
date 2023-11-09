@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/header';
 
 interface FormValues {
   username: string;
@@ -41,7 +42,6 @@ const Login: React.FC = () => {
           console.log(res);
           if (res.data.success) {
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('username', res.data.username);
             navigate('/');
             console.log('stored in local storage', res.data.token);
           } else {
@@ -60,12 +60,9 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleSignUp = () => {
-    navigate('/signup');
-  };
-
   return (
     <div className="App">
+      <Header showNavigation={false} />
       <div className='formDiv'>
         <h3>Login here!</h3>
         <form className='formClass' onSubmit={handleSubmit}>
@@ -79,7 +76,7 @@ const Login: React.FC = () => {
           <br />
           <button type="submit" className='submitButton'>Login</button>
         </form>
-        <p>New to EpicEntertain? <button className='signupBtnInLogin' onClick={handleSignUp}>Sign Up now</button></p>
+        <p>New to EpicEntertain? <button className='btnLink' onClick={() => navigate('/signup')}>Sign Up now</button></p>
       </div>
     </div>
   );

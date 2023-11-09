@@ -1,0 +1,39 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { ItemType, incrementQuantity, decrementQuantity  } from '../redux/cart/cart'; 
+
+const Sidebar: React.FC = () => {
+  const cartItems: ItemType[] = useSelector((state: any) => state.cart.cartItems);
+  const dispatch = useDispatch();
+
+  const handleIncrement = (id: number) => {
+    dispatch(incrementQuantity({ id }));
+  };
+
+  const handleDecrement = (id: number) => {
+    dispatch(decrementQuantity({ id }));
+  };
+
+  return (
+    <aside className="sidebar">
+      <div className='container'>
+        <h3>My Cart</h3>
+        {cartItems.length > 0 ? (
+          <ul>
+            {cartItems.map((item: ItemType) => (
+              <li key={item.id} className='cartList'>
+                {item.bookName} -
+                <button className='cartBtn' onClick={() => handleDecrement(item.id)}>-</button>
+                {item.quantity}
+                <button className='cartBtn' onClick={() => handleIncrement(item.id)}>+</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='emptyCart'>-- Your cart is empty --</p>
+        )}
+      </div>
+    </aside>
+  );
+};
+
+export default Sidebar;

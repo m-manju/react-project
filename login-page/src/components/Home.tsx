@@ -12,7 +12,6 @@ const Home: React.FC = () => {
     }
   }, [navigate, token]);
 
-
   const handleAllBooks =() => {
     navigate('/books');
   }
@@ -20,9 +19,17 @@ const Home: React.FC = () => {
   return (
     <>
       <Header showNavigation={true} /> 
-      <h2>Home</h2>
-      <button onClick={handleAllBooks}>View All Books</button>
-      <br/>
+      <div className='container homeTop'>
+        <div className='image-section'>
+          <img src={process.env.PUBLIC_URL + '/images/onlineLib.jpg'} alt='Online Library' />
+        </div>
+        <div className='cntnt-section'>
+          <h2>Welcome to Our Library</h2>
+          <p>Explore our collection of books and resources. 
+            Get started with a wide range of categories and topics.</p>
+          <button onClick={handleAllBooks}>View All Books</button>
+        </div>
+      </div>
     </>
   );
 }

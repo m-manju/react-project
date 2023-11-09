@@ -4,17 +4,23 @@ import Login from './components/login';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Books from './components/Books';
+import { Provider } from 'react-redux';
+import store from './redux/cart/store';
+
 
 const App: React.FC = () => {
+  
   return (
+    <Provider store={store}>
     <BrowserRouter>
-      <Routes>
+      <Routes> 
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} /> 
-        <Route path="/books" element={<Books />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home />} />
+        <Route path="/books" element={<Books />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 };
 

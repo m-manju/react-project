@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
+import Header from '../components/header';
 
 interface SignupPros {
   username: string;
@@ -44,7 +45,7 @@ const Signup: React.FC = () => {
         .then(res => {
           console.log(res);
           localStorage.setItem('token', res.data.token);
-          navigate('/');
+          navigate('/login');
           console.log('Successful signup');
         })
         .catch(err => {
@@ -60,6 +61,7 @@ const Signup: React.FC = () => {
 
   return (
     <>
+    <Header showNavigation={false} />
       <div className="formDiv">
         <h3>Signup here!</h3>
         <form className='formClass'  onSubmit={handleSignup}>
@@ -77,7 +79,7 @@ const Signup: React.FC = () => {
           <br />
           <button type="submit" className='submitButton'>Sign Up</button>
         </form>
-        <p>Already signed up? Login to EpicEntertain <button onClick={() => navigate('/login')}>Login here</button></p>
+        <p>Already signed up? Login to EpicEntertain <button onClick={() => navigate('/login')} className='btnLink'>Login here</button></p>
       </div>
       <Footer/>
     </>
