@@ -23,16 +23,25 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header showNavigation={true} /> 
+        <Header showNavigation={true} />
       <div className='container homeTop'>
         <div className='image-section'>
-          <img src={process.env.PUBLIC_URL + '/images/onlineLib.jpg'} alt='Online Library' />
-        </div>
-        <div className='cntnt-section'>
-          <h2>Welcome to Our Library</h2>
-          <p>Explore our collection of books and resources. 
-            Get started with a wide range of categories and topics.</p>
-          <button onClick={handleAllBooks}>View All Books</button>
+          <img
+            className='background-image'
+            src={process.env.PUBLIC_URL + '/images/bgImage.jpg'}
+            alt='Online Library'
+          />
+          <div className='content-overlay'>
+            <div className='text-section'>
+              <div>
+              <h2>Welcome to Our Library</h2>
+              <p>
+                Explore our collection of books and resources. Get started with a wide range of
+                categories and topics.</p>
+              <button onClick={handleAllBooks}>View All Books</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {adminToken && <CreateSubscriptionPlan />}
@@ -41,6 +50,8 @@ const Home: React.FC = () => {
       {adminToken && <AddBookForm />}
     </>
   );
+
+
 }
 
 export default Home;

@@ -38,9 +38,9 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
   return (
     <>
       <header>
-      <div className="main-header container">
-        <div className="top-section">
-          <div className="left-section">
+      <div className="main-header">
+        <div className="top-section container">
+          <div className="left-section ">
             <div className="logo-section">
               <div className="logo">EpicEntertain</div>
               <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
@@ -55,13 +55,13 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
         </div>
 
           {showNavigation && (
-            <div className="bottom-section">
+            <div className="bottom-section container">
               <nav>
                 <ul className="nav-list">
                   <li onClick={() => navigate('/')}>Home</li>
-                  <li onClick={() => navigate('/')}>About</li>
-                  <li onClick={() => navigate('/')}>Features</li>
-                  <li onClick={() => navigate('/')}>Contacts</li>
+                  <li onClick={() => navigate('/about')}>About</li>
+                  <li onClick={() => navigate('/books')}>Books</li>
+                  <li onClick={() => navigate('/contacts')}>Contacts</li>
                 </ul>
                 <button className='LogoutButton' onClick={handleLogout}>Log Out</button>
               </nav>

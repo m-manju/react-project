@@ -54,14 +54,14 @@ const SubscriptionPlans: React.FC = () => {
             <p>Price: {plan.price}</p>
             <p>Duration: {plan.duration}</p>
              {adminToken && (
-              <>
+              <div>
                 <button onClick={() => handleDeletePlan(plan.id)}>Delete Plan</button>
                 <input
                   type="number"
                   placeholder="New Plan ID"
                   onChange={(e) => setNewPlanId(Number(e.target.value))}
                 />
-              </>
+              </div>
             )}
           </li>
         ))}
@@ -72,3 +72,4 @@ const SubscriptionPlans: React.FC = () => {
 };
 
 export default SubscriptionPlans;
+

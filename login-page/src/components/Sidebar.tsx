@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="sidebar">
       <div className='container'>
-        <h3>My Readind Room</h3>
+        <h3>My Reading Room</h3>
         <br />
         <p>Reading Plans</p>
         {cartItems.length > 0 ? (

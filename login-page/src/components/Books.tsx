@@ -147,28 +147,32 @@ const Books: React.FC = () => {
     <div>
       <Header showNavigation={true} />
       <div className="container allBooks">
+      <div>
         <h2>Books</h2>
+        <div  className='BookSide1'>
         {books.map((book: Book) => (
           <div key={book.id} className="bookBox">
             <div>
-              <p>Book: {book.bookName}</p>
+              <p className='bookName'>Book: {book.bookName}</p>
               <p>Description: {book.description}</p>
               <p>isbn: {book.isbn}</p>
             </div>
             <button className="addToCartBtn" onClick={() => handleAddToCart(book, 0)}>
               Add to Room
             </button>
-            <button className="addToCartBtn" onClick={() => openEditModal(book)}>
-              Edit
-            </button>
-            <button className="addToCartBtn" onClick={() => handleDelete(book.id)}>
-              Delete
-            </button>
-            <button className="addToCartBtn" onClick={() => handleFileOpen(book.id)}>
-              Open File
-            </button>
+            {adminToken && (
+            <>
+              <button className="addToCartBtn" onClick={() => openEditModal(book)}>
+                 Edit</button>
+              <button className="addToCartBtn" onClick={() => handleDelete(book.id)}>
+                 Delete</button>
+              <button className="addToCartBtn" onClick={() => handleFileOpen(book.id)}>
+                 Open File</button>
+            </>
+            )}
           </div>
-        ))}
+        ))}</div>
+        </div>
         <Sidebar />
       </div>
 
