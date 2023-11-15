@@ -27,7 +27,6 @@ const AddBookFormWithFile: React.FC = () => {
   const handleAddBookWithFile = async (e: React.FormEvent) => {
     e.preventDefault();
     const { name, description, author_id, isbn, publication_year, bookFile } = formData;
-
     const formDataForApi = new FormData();
     formDataForApi.append('name', name);
     formDataForApi.append('description', description);
@@ -71,12 +70,7 @@ const AddBookFormWithFile: React.FC = () => {
         <input type="text" name="publication_year" value={formData.publication_year} onChange={handleInputChange} required />
         <br />
         <label>Book File:</label>
-        <input
-          type="file"
-          name="bookFile"
-          onChange={handleBookFileChange}
-          required
-        />
+        <input type="file" name="bookFile" onChange={handleBookFileChange} required/>
         <br />
         <button type="submit" className='submitButton'>Add Book with File</button>
       </form>
