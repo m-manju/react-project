@@ -31,6 +31,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
   const handleLogout = () => {
     setUserDetails(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('adminToken');
     navigate('/login');
   };
 

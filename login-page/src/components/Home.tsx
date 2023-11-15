@@ -1,16 +1,21 @@
 import React, { useEffect }  from 'react';
 import Header from '../components/header';
 import { useNavigate } from 'react-router-dom';
+import SubscriptionPlans from '../components/SubscriptionPlans';
+import CreateSubscriptionPlan from '../components/admin/SubscriptionPlans'; 
+import AddBookForm from '../components/admin/AddBook';
+import AddBookFormWithFile from './admin/AddBookFormWithFile'; 
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token'); 
+  const adminToken = localStorage.getItem('adminToken');
 
   useEffect(() => {
-    if (!token) {
+    if (!token && !adminToken) {
       navigate('/login');
     }
-  }, [navigate, token]);
+  }, [navigate, token, adminToken]);
 
   const handleAllBooks =() => {
     navigate('/books');
@@ -30,9 +35,12 @@ const Home: React.FC = () => {
           <button onClick={handleAllBooks}>View All Books</button>
         </div>
       </div>
+      {adminToken && <CreateSubscriptionPlan />}
+      <SubscriptionPlans />
+      {adminToken && <AddBookFormWithFile />}
+      {adminToken && <AddBookForm />}
     </>
   );
 }
 
 export default Home;
-

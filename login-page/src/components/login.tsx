@@ -37,7 +37,7 @@ const Login: React.FC = () => {
     setErrors({ ...newErrors });
 
     if (!newErrors.username && !newErrors.password) {
-      axios.post('http://localhost:3001/auth/login', values)
+      axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, values)
         .then(res => {
           console.log(res);
           if (res.data.success) {
@@ -77,6 +77,7 @@ const Login: React.FC = () => {
           <button type="submit" className='submitButton'>Login</button>
         </form>
         <p>New to EpicEntertain? <button className='btnLink' onClick={() => navigate('/signup')}>Sign Up now</button></p>
+        <p>ADMIN Login <button className='btnLink' onClick={() => navigate('/adminLogin')}>login</button></p>
       </div>
     </div>
   );

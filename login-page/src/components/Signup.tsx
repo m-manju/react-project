@@ -41,8 +41,8 @@ const Signup: React.FC = () => {
     setErrors({ ...newErrors });
 
     if (!newErrors.username && !newErrors.email && !newErrors.password) {
-      axios.post('http://localhost:3001/auth/signup', signupValues)
-        .then(res => {
+      axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signup`, signupValues)
+      .then(res => {
           console.log(res);
           localStorage.setItem('token', res.data.token);
           navigate('/login');

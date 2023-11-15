@@ -16,20 +16,22 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="sidebar">
       <div className='container'>
-        <h3>My Cart</h3>
+        <h3>My Readind Room</h3>
+        <br />
+        <p>Reading Plans</p>
         {cartItems.length > 0 ? (
           <ul>
             {cartItems.map((item: ItemType) => (
               <li key={item.id} className='cartList'>
                 {item.bookName} -
                 <button className='cartBtn' onClick={() => handleDecrement(item.id)}>-</button>
-                {item.quantity}
+                days:{item.quantity}
                 <button className='cartBtn' onClick={() => handleIncrement(item.id)}>+</button>
               </li>
             ))}
           </ul>
         ) : (
-          <p className='emptyCart'>-- Your cart is empty --</p>
+          <p className='emptyCart'>--Your room is empty--</p>
         )}
       </div>
     </aside>

@@ -13,7 +13,7 @@ body {
     margin: 0 auto; 
 }
 .main-header {
-  padding: 10px 20px;
+  padding: 20px;
 }
 .top-section {
   display: flex;
@@ -263,6 +263,7 @@ span{
   cursor: pointer;
   font-size: 14px;
   margin-top: 10px;
+  margin-right: 10px;
 }
 .allBooks{
   background-color: #4b4084;
@@ -273,15 +274,14 @@ span{
 }
 /* ---------- Sidebar --------- */
 .sidebar {
-  width: 250px;
+  width: 300px;
   background-color: #f3f3f3;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 125px;
+  position: fixed;
+  top: 140px;
   bottom: 0; 
-  right: 0; 
-  overflow-y: auto; 
+  right: 85px; 
 }
 .sidebar ul{
   padding: 10px 0;
@@ -291,10 +291,101 @@ span{
   color: #235b80;
   padding-top: 10px;
 }
-.sidebar p{
-  padding: 26px;
+.sidebar .emptyCart{
+  padding: 22px;
+  color: red;
 }
 .cartBtn{
   padding: 0 10px;
   margin: 0 10px ;
+}
+/* --------- subscription plans ------------- */
+
+.subscriptionPlans {
+  color: #333;
+  text-align: center;
+  font-size: 26px;
+  padding: 20px;
+  border-radius: 10px;
+  border: #4b4084 5px solid;
+  margin-top: 30px;
+  background-color: aliceblue;
+}
+.subscriptionPlans ul{
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+.subscription-plan {
+  background-color: aliceblue;
+  padding: 20px;
+  margin: 20px 0;
+  align-items: center;
+  list-style-type: none;
+  border: #443886 1.5px solid;
+  cursor: pointer;
+}
+.subscription-plan:hover {
+  background-color: rgb(191, 209, 225);
+  border: #443886 2.5px solid;
+}
+.subscription-plan p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.subscription-plan p {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.subscription-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+}
+label {
+  display: block;
+  margin: 12px 0;
+}
+select {
+  width: 300px;
+  padding: 8px;
+  margin-bottom: 16px; 
+  margin-right: 10px;
+}
+.subscription-form button {
+  background-color: #4b4084;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.subscription-form button:hover {
+  background-color: #655858;
+}
+.activeSubscription h4{
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.activeSubscription p{
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.createForm{
+  background-color: #bab3e1;
+  width: 70%;
+  margin-top: 20px;
+  padding: 30px;
+  border: 2px solid #333;
+  border-radius: 12px;
+  text-align: center;
+}
+.subscriptionForm button{
+  max-width: 200px;
+  margin-top: 10px;
 }
