@@ -52,27 +52,34 @@ const AddBookForm: React.FC = () => {
   };
 
   return (
-    <div className="createForm container">
+    <div className="createAll container">
     <h3>Add New Books!!</h3>
-    <form onSubmit={handleAddBook} className="subscriptionForm">
-      <label>Name:
+    <form onSubmit={handleAddBook} className="subscriptionCreate">
+      
+     <div className="label-group">
+      <label>Name: </label>
       <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
-      </label>
-      <label>Description:
+      </div>
+      <div className="label-group">
+      <label>Description:</label>
       <input type="text" name="description" value={formData.description} onChange={handleInputChange} required />
-      </label>
-      <label>Author:
+      </div>
+      <div className="label-group">
+      <label>Author:</label>
       <input type="text" name="author_id" value={formData.author_id} onChange={handleInputChange} required />
-      </label>
-      <label>ISBN:
+      </div>
+      <div className="label-group">
+      <label>ISBN:</label>
       <input type="number" name="isbn" value={formData.isbn} onChange={handleInputChange} required />
-      </label>
-      <label>Publication year:
+      </div>
+      <div className="label-group">
+      <label>Publication year: </label>
       <input type="text" name="publication_year" value={formData.publication_year} onChange={handleInputChange} required />
-      </label>
+     </div>
+      <div className="label-group">
       <label>Image:
-      <input type="file" name="image" onChange={handleImageChange} />
-      </label>
+      <input className='imageInput' type="file" name="image" onChange={handleImageChange} />
+      </label></div>
       <button type="submit"  className='submitButton'>Add Book</button>
     </form>
     {subscriptionSuccess && (

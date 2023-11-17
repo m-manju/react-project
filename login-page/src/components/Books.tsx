@@ -17,13 +17,13 @@ interface Book {
   isbn: number;
   author_id: number;
   publication_year: number;
+  image_url?: string; 
 }
 
 const Books: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [editBook, setEditBook] = useState<Book | null>(null);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ const Books: React.FC = () => {
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
         headers,
       });
-
       setBooks(response.data?.books || []);
       console.log('fetching books');
     } catch (error) {
@@ -78,19 +77,6 @@ const Books: React.FC = () => {
     }
   };
 
-  const handleFileOpen = async (bookId: number) => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/adminBooks/getBook/${bookId}`);
-
-      if (response.data.success) {
-        setFileUrl(response.data.fileUrl);
-      } else {
-        console.error('Failed to get book file URL');
-      }
-    } catch (error) {
-      console.error('Error getting book file:', error);
-    }
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -152,22 +138,21 @@ const Books: React.FC = () => {
         <div  className='BookSide1'>
         {books.map((book: Book) => (
           <div key={book.id} className="bookBox">
-            <div>
+            <div className='bookDetails'>
+              <div>
               <p className='bookName'>Book: {book.bookName}</p>
               <p>Description: {book.description}</p>
               <p>isbn: {book.isbn}</p>
+              <button className="addToCartBtn" onClick={() => handleAddToCart(book, 0)}> Add to Room</button>
+              </div>
+              {book.image_url && <img src={book.image_url} alt={`Cover of ${book.bookName}`}  className='bookImage' />}
             </div>
-            <button className="addToCartBtn" onClick={() => handleAddToCart(book, 0)}>
-              Add to Room
-            </button>
             {adminToken && (
             <>
               <button className="addToCartBtn" onClick={() => openEditModal(book)}>
                  Edit</button>
               <button className="addToCartBtn" onClick={() => handleDelete(book.id)}>
                  Delete</button>
-              <button className="addToCartBtn" onClick={() => handleFileOpen(book.id)}>
-                 Open File</button>
             </>
             )}
           </div>
@@ -196,12 +181,6 @@ const Books: React.FC = () => {
               Cancel
             </button>
           </form>
-        </div>
-      )}
-      {fileUrl && (
-        <div className="file-viewer">
-          <h3>File Viewer</h3>
-          <iframe title="file-viewer" src={fileUrl} width="100%" height="500px" />
         </div>
       )}
       <Footer />

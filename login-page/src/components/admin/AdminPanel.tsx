@@ -34,8 +34,9 @@ const AdminPanel: React.FC = () => {
         
     <div className="App">
       <Header showNavigation={false} />
-          <form className='formDiv'>
+        <div className='formDiv'>
           <h3>Admin Login</h3>
+          <form className='formClass'>
             <label> Full Name:
              <input type="text" value={loginData.full_name}onChange={(e) => setLoginData({ ...loginData, full_name: e.target.value })}/>
             </label>
@@ -46,6 +47,7 @@ const AdminPanel: React.FC = () => {
             <br />
             <button type="button" onClick={handleLoginAdmin}>Login</button>
           </form>
+        </div>
     </div>
   );
 };

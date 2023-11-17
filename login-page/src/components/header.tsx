@@ -48,8 +48,13 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
           </div>
             {userDetails && (
               <div className="user-details">
+                <div className="user-icon">
+                  <i className="fas fa-user"  style={{ color: 'white' }}></i>
+                </div>
+                <div>
                 <h2>Welcome {userDetails.username}!</h2>
                 <p>Email: {userDetails.email}</p>
+                </div>
               </div>
             )}
         </div>

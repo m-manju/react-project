@@ -18,15 +18,17 @@ const Sidebar: React.FC = () => {
       <div className='container'>
         <h3>My Reading Room</h3>
         <br />
-        <p>Reading Plans</p>
+        <p>Reading-Plans</p>
         {cartItems.length > 0 ? (
           <ul>
             {cartItems.map((item: ItemType) => (
               <li key={item.id} className='cartList'>
-                {item.bookName} -
+                <p>{item.bookName}:</p>
                 <button className='cartBtn' onClick={() => handleDecrement(item.id)}>-</button>
                 days:{item.quantity}
                 <button className='cartBtn' onClick={() => handleIncrement(item.id)}>+</button>
+                <br />
+                <hr />
               </li>
             ))}
           </ul>

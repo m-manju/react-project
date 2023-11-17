@@ -31,21 +31,29 @@ const CreateSubscriptionPlan: React.FC = () => {
   };
 
   return (
-    <div className="createForm container">
+    <div className="createAll container">
       <h3>Create New Subscription Plan</h3>
-      <form className="subscriptionForm">
-        <label> Type:
+      <form className="subscriptionCreate">
+        
+      <div className="label-group">
+        <label> Type:</label>
           <input type="text" name="type" value={planData.type} onChange={handleInputChange} />
-        </label>
-        <label>Details:
+        </div>
+        <div className="label-group">
+        <label>Details:</label>
           <input type="text" name="details" value={planData.details} onChange={handleInputChange} />
-        </label>
-        <label> Price:
+        
+        </div>
+        <div className="label-group">
+        <label> Price: </label>
           <input type="number" name="price" value={planData.price} onChange={handleInputChange} />
-        </label>
-        <label> Duration:
+       
+        </div>
+        <div className="label-group">
+        <label> Duration:</label>
           <input type="number" name="duration" value={planData.duration} onChange={handleInputChange} />
-        </label>
+        
+        </div>
         <button type="button" className='submitButton' onClick={handleCreatePlan}>Create Plan</button>
       </form>
     </div>

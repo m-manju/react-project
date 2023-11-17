@@ -43,6 +43,7 @@ const SubscriptionPlans: React.FC = () => {
       });
   }, []);
 
+
   return (
     <div className="subscriptionPlans container">
       <h3>Subscription Plans</h3>
@@ -51,16 +52,12 @@ const SubscriptionPlans: React.FC = () => {
           <li key={plan.id} className="subscription-plan">
             <p>{plan.type}</p>
             <p>{plan.details}</p>
-            <p>Price: {plan.price}</p>
-            <p>Duration: {plan.duration}</p>
+            <p>Price: ${plan.price}</p>
+            <p>Duration: {plan.duration}days</p> 
              {adminToken && (
-              <div>
+              <div className='fordelete'>
                 <button onClick={() => handleDeletePlan(plan.id)}>Delete Plan</button>
-                <input
-                  type="number"
-                  placeholder="New Plan ID"
-                  onChange={(e) => setNewPlanId(Number(e.target.value))}
-                />
+                <input type="number" placeholder="New Plan ID" onChange={(e) => setNewPlanId(Number(e.target.value))}/>
               </div>
             )}
           </li>

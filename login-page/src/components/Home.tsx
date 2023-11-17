@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import SubscriptionPlans from '../components/SubscriptionPlans';
 import CreateSubscriptionPlan from '../components/admin/SubscriptionPlans'; 
 import AddBookForm from '../components/admin/AddBook';
-import AddBookFormWithFile from './admin/AddBookFormWithFile'; 
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +22,8 @@ const Home: React.FC = () => {
 
   return (
     <>
-        <Header showNavigation={true} />
+      <Header showNavigation={true} />
+      <div className='blackBox'>
       <div className='container homeTop'>
         <div className='image-section'>
           <img
@@ -38,19 +38,20 @@ const Home: React.FC = () => {
               <p>
                 Explore our collection of books and resources. Get started with a wide range of
                 categories and topics.</p>
-              <button onClick={handleAllBooks}>View All Books</button>
+              <button onClick={handleAllBooks} className='coverPageBtn'>View All Books</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {adminToken && <CreateSubscriptionPlan />}
+      </div>
       <SubscriptionPlans />
-      {adminToken && <AddBookFormWithFile />}
+      <div className='adminActivity container'>
+      {adminToken && <CreateSubscriptionPlan />}
       {adminToken && <AddBookForm />}
+      </div>
     </>
   );
-
 
 }
 
