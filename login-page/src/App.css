@@ -80,10 +80,6 @@ p {
 .user-details h2, .user-details p{
   color: #efeeef;
 }
-.LogoutButton{
-  background-color: white;
-  color: #040305;
-}
 button {
   padding: 10px 20px;
   font-size: 1.2em;
@@ -626,7 +622,6 @@ span{
 .social-media-links {
   margin-top: 20px;
 }
-
 .social-media-links a {
   display: inline-block;
   margin-right: 15px;
@@ -635,7 +630,6 @@ span{
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
 .social-media-links a:hover {
   color: #007bff;
 }

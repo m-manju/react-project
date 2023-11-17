@@ -30,19 +30,7 @@ const Books: React.FC = () => {
   const token = localStorage.getItem('token');
   const adminToken = localStorage.getItem('adminToken');
 
-  const fetchBooks = async () => {
-    try {
-      const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
 
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
-        headers,
-      });
-      setBooks(response.data?.books || []);
-      console.log('fetching books');
-    } catch (error) {
-      console.error('Error fetching books:', error);
-    }
-  };
 
   const handleAddToCart = (book: Book, quantity: number) => {
     dispatch(addToCart({ id: book.id, bookName: book.bookName, quantity }));
@@ -68,7 +56,6 @@ const Books: React.FC = () => {
 
       if (response.data.success) {
         console.log('Book deleted successfully');
-        fetchBooks();
       } else {
         console.error('Failed to delete book');
       }
@@ -104,7 +91,6 @@ const Books: React.FC = () => {
       console.log('Edit response:', response);
       console.log(adminToken);
       closeEditModal();
-      fetchBooks();
     } catch (error: any) {
       console.error('Error editing book:', error);
       console.error('Full error object:', error);
@@ -122,6 +108,19 @@ const Books: React.FC = () => {
   
 
   useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
+  
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
+          headers,
+        });
+        setBooks(response.data?.books || []);
+        console.log('fetching books');
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
+    };
     if (!token && !adminToken) {
       navigate('/login');
     } else {

@@ -27,7 +27,7 @@ const About: React.FC = () => {
             We strive to provide a diverse and extensive collection of books, catering to the varied
             interests and passions of our readers. We believe in fostering a love for reading and
             promoting intellectual growth.</p>
-          {/* <h3>What Sets Us Apart</h3>
+          <h3>What Sets Us Apart</h3>
           <ul>
             <li>
               <strong>Extensive Collection:</strong> Explore our vast collection of books spanning
@@ -45,7 +45,7 @@ const About: React.FC = () => {
           <h3>Our Commitment to Education</h3>
           <p>Education is at the core of our values. We collaborate with educational institutions,
             support literacy programs, and actively contribute to the intellectual growth of our
-            community. </p> */}
+            community. </p>
           
         </div>
       </div>

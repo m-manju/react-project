@@ -22,23 +22,25 @@ const SubscriptionForm: React.FC = () => {
   const [subscriptionSuccess, setSubscriptionSuccess] = useState<boolean>(false);
   const [allSubscriptionPlans, setAllSubscriptionPlans] = useState<SubscriptionPlan[]>([]);
   const token = localStorage.getItem('token');
-
   const navigate = useNavigate();
+
+
+  console.log(allSubscriptionPlans,activeSubscription)
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userId = userDetails?.id;
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/active/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setActiveSubscription(response.data.responseObject);
-      } catch (error) {
-        console.error('Error fetching active subscription:', error);
-      }
-    };
+    
+  const fetchData = async () => {
+    try {
+      const userId = userDetails?.id;
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/active/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setActiveSubscription(response.data.responseObject);
+    } catch (error) {
+      console.error('Error fetching active subscription:', error);
+    }
+  };
     fetchData();
-    const intervalId = setInterval(fetchData, 1 * 1000);
-    return () => clearInterval(intervalId);
+
   }, [token, userDetails]);
 
   useEffect(() => {
@@ -47,13 +49,14 @@ const SubscriptionForm: React.FC = () => {
       try {
         const decoded: UserDetails = jwtDecode(token) as UserDetails;
         setUserDetails(decoded);
+
         axios
           .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((response) => {
             setAllSubscriptionPlans(response.data.subscriptions || []);
-            console.log('Fetched plans:', response.data.subscriptions);
+
             if (response.data.subscriptions && response.data.subscriptions.length > 0) {
               setSelectedPlan(response.data.subscriptions[0]);
             }
@@ -92,20 +95,22 @@ const SubscriptionForm: React.FC = () => {
                 <div className='userDetails'>
                   <input type="text" placeholder='Full Name' />
                   <br />
-                  <input type="text"  placeholder='Email Id'/>
+                  <input type="text" placeholder='Email Id' />
                 </div>
                 <div>
-                <p className='enterDetails'>Enter your payment details</p>
-                <hr />
-                <input type="text" className='cardNo' placeholder='Card number'/>
-                <br />
-                <input type="text"  placeholder='Month & Year'/>
-                <input type="text" placeholder='CVV Code'/>
+                  <p className='enterDetails'>Enter your payment details</p>
+                  <hr />
+                  <input type="text" className='cardNo' placeholder='Card number' />
+                  <br />
+                  <input type="text" placeholder='Month & Year' />
+                  <input type="text" placeholder='CVV Code' />
                 </div>
               </div>
               <div className='payBtnBox'>
                 <p>pay now</p>
-                <button className='payBtn' onClick={handleSubscription}>Pay  ${selectedPlan.price}</button>
+                <button className='payBtn' onClick={handleSubscription}>
+                  Pay  ${selectedPlan.price}
+                </button>
               </div>
             </div>
           )}
@@ -118,7 +123,7 @@ const SubscriptionForm: React.FC = () => {
                   custom Subscription updated successfully! 🎉
                 </div>
                 <button onClick={() => navigate('/')} className='goHome'>Go to home</button>
-             </div>
+              </div>
             </>
           )}
         </div>
@@ -128,4 +133,3 @@ const SubscriptionForm: React.FC = () => {
 };
 
 export default SubscriptionForm;
-
