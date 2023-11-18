@@ -30,8 +30,6 @@ const Books: React.FC = () => {
   const token = localStorage.getItem('token');
   const adminToken = localStorage.getItem('adminToken');
 
-
-
   const handleAddToCart = (book: Book, quantity: number) => {
     dispatch(addToCart({ id: book.id, bookName: book.bookName, quantity }));
     console.log(`Book with ID ${book.id}, ${book.bookName} added to the cart.`);

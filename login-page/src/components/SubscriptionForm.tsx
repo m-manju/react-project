@@ -18,14 +18,22 @@ interface SubscriptionPlan {
 const SubscriptionForm: React.FC = () => {
   const [subscriptionType, setSubscriptionType] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
-  const [subscriptionSuccess, setSubscriptionSuccess] = useState<boolean>(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [activeSubscription, setActiveSubscription] = useState<any>(null);
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [allSubscriptionPlans, setAllSubscriptionPlans] = useState<SubscriptionPlan[]>([]);
   const [subscriptionTypeSelected, setSubscriptionTypeSelected] = useState<boolean>(true);
-  const token = localStorage.getItem('token');
   const navigate = useNavigate();
+
+  const token = localStorage.getItem('token'); 
+  const adminToken = localStorage.getItem('adminToken');
+
+  useEffect(() => {
+    if (!token && !adminToken) {
+      navigate('/login');
+    }
+  }, [navigate, token, adminToken]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,31 +47,22 @@ const SubscriptionForm: React.FC = () => {
         console.error('Error fetching active subscription:', error);
       }
     };
-
-    fetchData();
-  }, [token, userDetails]);
+    const intervalId = setInterval(fetchData, 1 * 1000);
+    fetchData(); 
+    return () => clearInterval(intervalId);
+  }, [token, userDetails,selectedPlan]);
 
   const handlePayment = () => {
     if (subscriptionType === '') {
       setSubscriptionTypeSelected(false);
-    } else if (allSubscriptionPlans.length > 0) {
-      const selectedPlan = allSubscriptionPlans[0];
-      setSelectedPlan(selectedPlan);
-      setSubscriptionTypeSelected(true);
-      navigate('/payment');
-    }
-  };
-
-  const handleSubscription = async () => {
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/subscriptions/updates`,
-        { subscriptionType },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setSubscriptionSuccess(true);
-    } catch (error) {
-      console.error('Error updating subscription:', error);
+    } else {
+      const selectedPlan = allSubscriptionPlans.find(plan => plan.type === subscriptionType);
+      if (selectedPlan) {
+        setSelectedPlan(selectedPlan);
+        setSubscriptionTypeSelected(true);
+        console.log(quantity,selectedPlan.type,selectedPlan.price * quantity);
+        navigate(`/payment/${quantity}/${selectedPlan.type}/${selectedPlan.price * quantity}`);
+      }
     }
   };
 
@@ -92,61 +91,42 @@ const SubscriptionForm: React.FC = () => {
 
   return (
     <div className="createForm container">
-      <div className="subscribeNow">
-        <h3>Subscribe Now!</h3>
-        <p>Welcome to our premium subscription service! Explore a variety of subscription plans tailored to fit your needs,
+      <div className='black-subscribe'>
+        <div className="subscribeNow">
+          <h3>Subscribe Now!</h3>
+          <p>Welcome to our premium subscription service! Explore a variety of subscription plans tailored to fit your needs,
           whether it's a weekly, monthly, or yearly commitment. Enjoy exclusive benefits and flexibility in managing your
           subscriptions. Plus, don't forget, you can take advantage of our custom subscription option for a personalized
           experience! Subscribe today and elevate your journey with us.</p>
-      </div>
-      <div className="subscribBox">
-        <div className="subscriptionBox">
-          <div>
-            <label className='choose'>Choose Subscription Type</label>
-            <br /><br />
-            <div className="subscription-controls">
-              <select
-                id="subscriptionType"
-                value={subscriptionType}
-                onChange={(e) => {
-                  setSubscriptionType(e.target.value);
-                  setSubscriptionTypeSelected(true);
-                }} >
-                <option value="" disabled>
-                  Select a plan </option>
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Yearly">Yearly</option>
-              </select>
-
+        </div>
+        <div className="subscribBox">
+          <div className="subscriptionBox">
+            <div>
+              <label className='choose'>Pick a plan that's right for you</label>
+              <br /><br />
+              <div className="subscription-controls">
+              <label>
+                <select id="subscriptionType" value={subscriptionType} onChange={(e) => {
+                  setSubscriptionType(e.target.value);  setSubscriptionTypeSelected(true);}} >
+                  <option value="" disabled> Select a plan </option>
+                  {allSubscriptionPlans.map((plan) => (
+                      <option key={plan.id} value={plan.type}>
+                        {plan.type} 
+                      </option>
+                      ))}
+                </select>
+              </label>
               <label className='labelQuantity'>Quantity :</label>
               <input type="number" id="quantity" value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value))} />
+                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value)))}/>
             </div>
             {!subscriptionTypeSelected && (
               <div className="subscription-error-message">
                 Please select a subscription type before proceeding.
               </div>
             )}
-
-            <br />
+            <br/>
             <button onClick={handlePayment}>Pay now</button>
-            {selectedPlan && (
-              <div className='payment'>
-                <h4>Selected Plan</h4>
-                <p>Type: {selectedPlan.type}</p>
-                <p>Price: ${selectedPlan.price}</p>
-                <button className='cnfrmSubscription' onClick={handleSubscription}>Confirm Subscription</button>
-              </div>
-            )}
-
-            {subscriptionSuccess && (
-              <>
-                <div className="subscription-success-message">
-                  Custom Subscription updated successfully! 🎉
-                </div>
-              </>
-            )}
           </div>
           {activeSubscription && (
             <div className="activeSubscription">
@@ -158,6 +138,7 @@ const SubscriptionForm: React.FC = () => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };

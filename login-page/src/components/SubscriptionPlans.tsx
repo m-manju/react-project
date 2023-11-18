@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SubscriptionForm from './SubscriptionForm';
 
@@ -10,18 +11,24 @@ interface SubscriptionPlan {
   duration:number;
 }
 
-const token = localStorage.getItem('token');
-const adminToken = localStorage.getItem('adminToken');
-
 const SubscriptionPlans: React.FC = () => {
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [newPlanId, setNewPlanId] = useState<number | null>(null);
+  const token = localStorage.getItem('token'); 
+  const adminToken = localStorage.getItem('adminToken');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token && !adminToken) {
+      navigate('/login');
+    }
+  }, [navigate, token, adminToken]);
 
   const handleDeletePlan = async (planId: number) => {
     try {
       const response = await axios.delete(
         `${process.env.REACT_APP_API_BASE_URL}/adminSubscriptions/deletePlan/${planId}`,
-        { headers: { Authorization: `Bearer ${adminToken}`  }, data: { newPlanId: newPlanId } }
+        { headers: { Authorization: `Bearer ${adminToken}`  }, data: { newPlanId: newPlanId }}
       );
       console.log(response.data.message);
     } catch (error) {
@@ -41,7 +48,7 @@ const SubscriptionPlans: React.FC = () => {
       .catch(error => {
         console.error('Error fetching subscription plans:', error);
       });
-  }, []);
+  }, [adminToken,token]);
 
 
   return (
@@ -50,9 +57,9 @@ const SubscriptionPlans: React.FC = () => {
       <ul>
         {plans.map(plan => (
           <li key={plan.id} className="subscription-plan">
-            <p>{plan.type}</p>
+            <p className='type'>{plan.type}</p>
+            <p className='price'>${plan.price}</p>
             <p>{plan.details}</p>
-            <p>Price: ${plan.price}</p>
             <p>Duration: {plan.duration}days</p> 
              {adminToken && (
               <div className='fordelete'>

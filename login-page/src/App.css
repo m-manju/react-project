@@ -19,7 +19,6 @@ body {
 /* ------------------------ home --------------------------- */
 .blackBox{
   background-color: #000;
-  padding-bottom: 20px;
 }
 .image-section {
   position: relative;
@@ -46,13 +45,99 @@ body {
 }
 .text-section{
   max-width: 400px;
-  margin-left: 600px;
 }
 .cntnt-section {
   text-align: center;
   color: #fff;
   padding: 20px;
 }
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #000;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-8 {
+  background-color: #f0ecfc;
+  background-image: linear-gradient(315deg, #f0ecfc 0%, #726a66 74%);
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-8 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-weight: bold;
+}
+.btn-8:before,
+.btn-8:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #c0bdc3;
+  transition: all 0.3s ease;
+}
+.btn-8:before{
+   height: 0%;
+   width: 2px;
+}
+.btn-8:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-8:hover:before {
+  height: 100%;
+}
+.btn-8:hover:after {
+  width: 100%;
+}
+.btn-8:hover{
+  background: transparent;
+}
+.btn-8 span:hover{
+  color: #a79fa7;
+}
+.btn-8 span:before,
+.btn-8 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #a79fa7;
+  transition: all 0.3s ease;
+}
+.btn-8 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-8 span:after {
+  height: 2px;
+  width: 0%;
+}
+.btn-8 span:hover:before {
+  height: 100%;
+}
+.btn-8 span:hover:after {
+  width: 100%;
+}
+  
 
 h2, p{
   color: rgb(234, 229, 229);
@@ -69,28 +154,9 @@ p {
   font-size: 1.2em;
   margin-bottom: 20px;
 }
-.coverPageBtn{
-  background-color: #152537;
-}
-.coverPageBtn:hover{
-  background-color: #fafbfc;
-  color: #000;
-}
 /* --------------------- header ------------------ */
 .user-details h2, .user-details p{
   color: #efeeef;
-}
-button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #121517;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #393b3c;
-  }
 }
 .logo-section p{
   color: #efeeef;
@@ -144,17 +210,17 @@ nav{
   list-style-type: none;
   padding: 0;
   display: flex;
+  justify-content: space-around;
+  width: 450px;
 }
 .nav-list li {
-  margin-right: 40px;
-  margin-left: 30px;
   cursor: pointer;
   color: #1b191b;
+  padding: 2px ;
 }
 .nav-list li:hover {
-  color: #fdfbfb;
-  background-color: #606162;
   border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #000;
 }
 .LogoutButton {
   padding: 8px 36px;
@@ -238,7 +304,7 @@ span{
   color: black;
 }
 .footer {
-  background-color: #333;
+  background-color: #000;
   color: #fff;
   padding-top: 10px;
   height: 40px;
@@ -252,13 +318,25 @@ span{
   font-size: 12px;
 }  
 /* ---------- books --------- */
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #121517;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #393b3c;
+  }
+}
 .bookBox {
   background-color: rgb(239, 239, 239);
   padding: 20px;
   margin: 20px;
   align-items: center;
   width: 400px;
-  box-shadow: 0px 0px 10px 0px #333;
+  box-shadow: 0px 0px 10px 0px #a8a4a4;
 }
 .addToCartBtn {
   padding: 8px 16px;
@@ -338,11 +416,10 @@ span{
   width: 100px;
 }
 /* --------- subscription plans ------------- */
-
 .subscriptionPlans {
   text-align: center;
   font-size: 26px;
-  padding: 80px 0;
+  padding-top: 80px;
   background-color: rgb(255, 254, 254);
 }
 .subscriptionPlans ul{
@@ -355,19 +432,25 @@ span{
   padding-bottom: 30px;
 }
 .subscription-plan {
-  background-color: rgb(227, 228, 230);
-  padding: 20px;
+  background-color: rgb(254, 254, 255);
   margin: 20px 0;
   align-items: center;
   list-style-type: none;
-  border: #101012 2.5px solid;
-  box-shadow: 2px 2px 50px 2px #d1d1d1;
+  box-shadow: 1px 1px 30px 1px  #d1d1d1;
   cursor: pointer;
   width: 250px;
   height: 250px;
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+.subscription-plan:hover {
+  box-shadow: 10px 10px 30px 0px  #d1d1d1;
+}
+.subscription-plan .price{
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .subscribeNow2{
   font-size: 26px;
@@ -379,18 +462,17 @@ span{
   margin-top: 50px;
 }
 .subscriptionBox select{
-  width: 130px;
   margin-right: 10px;
   height: 25px;
+  width: 130px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 .subscriptionBox input{
-  width: 35px;
+  width: 45px;
   margin-left: 10px;
   height: 25px;
-}
-.subscription-plan:hover {
-  background-color: rgb(191, 209, 225);
-  border: #443886 2.5px solid;
 }
 .subscription-plan p:first-child {
   font-size: 18px;
@@ -423,9 +505,7 @@ span{
 .labelQuantity{
   font-size: 16px;
 }
-
-
-/* -------------------payment--------- */
+/* ------------------- payment ------------- */
 .payment{
   margin-top: 20px;
   background-color: #fff;
@@ -514,14 +594,17 @@ span{
   color: #141414;
   background-color: rgb(186, 184, 184);
 }
-/* ---------------payment---------------- */
+/* ---------------subscribBox---------------- */
 .subscribBox button {
-  background-color: #aaa3a3;
-  font-size: 23px;
+  background-color: #282525;
+  border: whitesmoke 2px solid;
+  font-size: 16px;
   border-radius: 30px;
+  padding: 7px; width: 140px;
 }
 .subscribBox button:hover {
-  background-color: #655858;
+  background-color: #f5f0f0;
+  color: #000;
 }
 .activeSubscription h4{
   font-size: 20px;
@@ -534,6 +617,18 @@ span{
 .subscription-controls{
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.subscription-controls select{
+  border-radius: 30px;
+  text-align: center;
+  height: 30px;
+}
+.subscription-controls input{
+  border-radius: 30px;
+  text-align: center;
+  padding-left: 10px;
+  height: 30px;
 }
 .subscription-error-message{
   color: #ff0000;
@@ -541,15 +636,16 @@ span{
   margin-top: 10px;
 }
 .createForm{
-  background-color: #080809;
-  margin-top: 20px;
-  padding: 30px;
-  border: 2px solid #333;
-  border-radius: 12px;
+  padding: 60px;
+}
+.black-subscribe{
+  background-color: #000;
+  border-radius: 18px;
   text-align: center;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 50px;
 }
 .createForm h3, .createForm label{
   color: whitesmoke;
@@ -570,70 +666,100 @@ span{
   max-width: 200px;
   margin-top: 10px;
 }
-
-.about,
-.contact {
+/* ---------------about------------------ */
+.about {
   text-align: center;
+  display: flex;
 }
-
-.about h2,
-.contact h2 {
+.about img{
+  width: 200px;
+  margin: 30px;
+}
+.about-section{
+  margin-top: 40px;
+}
+.about h2{
   font-size: 2em;
   color: #333;
-  margin-bottom: 20px;
 }
-
-.about p,
-.contact p {
-  font-size: 1.2em;
-  color: #555;
+.about h3{
+  color: #000;
+  margin-top: 10px;
+}
+.about p{
+  font-size: 1.15em;
+  color: #383737;
   line-height: 1.5;
+  margin: 20px 0;
 }
-
-.about button,
-.contact button {
-  background-color: #010306;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.about  ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.about button:hover,
-.contact button:hover {
-  background-color: #242a31;
+.about  li{
+  list-style-type: circle;
+  text-align: left;
+  margin-top: 15px;
+  max-width: 600px;
+  line-height: 1.6;
 }
-
+.aboutUl h3{
+  color: whitesmoke;
+}
+.aboutUl{
+  background-color: #5c5d5e;
+  padding: 20px 30px;
+  color: whitesmoke;
+}
+/* ------- contact ------- */
+.contact-section {
+  text-align: center;
+  background-image: linear-gradient(315deg, #f0ecfc 0%, #000 74%);
+  font-family: 'Times New Roman', Times, serif;
+}
+.contact-section h2 {
+  padding-top: 40px;
+}
+.contact-section p, .contact-section h3,.contact-section h2 {
+  color: #e5e2e2;
+}
 .contact-details {
-  margin-top: 20px;
+  padding-top: 20px;
+  line-height: 1.6;
 }
-.about-section ul{
-
-  list-style-type: none;
-  padding: 0;
+.contact-details strong {
+  font-weight: bold;
 }
-.contact-details p {
-  font-size: 1.1em;
-  color: #777;
+.social-media-icons {
+  margin: 20px;
 }
-
-.social-media-links {
-  margin-top: 20px;
-}
-.social-media-links a {
+.social-media-icons a {
   display: inline-block;
-  margin-right: 15px;
-  font-size: 1.5em;
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  margin-right: 30px;
+  font-size: 24px;
+  width: 40px;
+  height: 32px;
+  color: #f9f8f8;
 }
-.social-media-links a:hover {
-  color: #007bff;
+.social-media-icons a:hover {
+  color: #0b0909;
+  border-radius: 50%;
 }
-
+.viewAll {
+  padding: 10px 20px;
+  border: none;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.viewAll:hover {
+  background-color: #f3f5f6;
+  color: #000;
+}
+/* ----------------------------------------- */
 .adminActivity{
   display: flex;
   justify-content: space-between;
