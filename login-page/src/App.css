@@ -357,6 +357,8 @@ button {
 .allBooks h2{
   padding: 20px;
   color: rgb(14, 15, 16);
+  text-align: center;
+  margin-top: 20px;
 } 
 .bookName{
   font-weight: bold;
@@ -368,6 +370,7 @@ button {
 .BookSide1{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .bookDetails{
   display: flex;
@@ -465,7 +468,6 @@ button {
   margin-right: 10px;
   height: 25px;
   width: 130px;
-  height: 30px;
   font-size: 14px;
   border-radius: 5px;
 }
@@ -504,6 +506,22 @@ button {
 }
 .labelQuantity{
   font-size: 16px;
+}
+.viewPlan{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#viewPlanBtn{
+  background-color: white;
+  color: #000;
+  font-size: 12px;
+  padding: 5px;
+  margin-top: 15px;
+}
+#viewPlanBtn:hover{
+  background-color: rgb(79, 57, 57);
+  color: #c8c1c1;
 }
 /* ------------------- payment ------------- */
 .payment{
@@ -762,10 +780,10 @@ button {
 /* ----------------------------------------- */
 .adminActivity{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .createAll {
-  margin: 0 auto;
+  margin: 60px;
   background-color: #edeaea;
   padding: 20px;
   border-radius: 8px;
@@ -820,4 +838,13 @@ button {
 .fordelete button {
   height: 35px;
   font-size: 13px;
+}
+/* ------------- edit--------------- */
+.edit-modal{
+  background-color: #080707;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

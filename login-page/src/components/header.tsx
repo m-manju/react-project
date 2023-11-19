@@ -15,6 +15,7 @@ interface UserDetails {
 const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const adminToken = localStorage.getItem('adminToken');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -67,6 +68,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
                   <li onClick={() => navigate('/about')}>About</li>
                   <li onClick={() => navigate('/books')}>Books</li>
                   <li onClick={() => navigate('/contacts')}>Contacts</li>
+                  { adminToken && (<li onClick={() => navigate('/admin')}>Admin Activities</li>)}
                 </ul>
                 <button className='LogoutButton' onClick={handleLogout}>Log Out</button>
               </nav>

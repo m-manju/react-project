@@ -34,7 +34,7 @@ const PaymentPage: React.FC = () => {
   }, [navigate, token, adminToken]);
 
   console.log(allSubscriptionPlans, activeSubscription);
-  console.log(type, total);
+  console.log(quantity,type, total);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,11 +80,13 @@ const PaymentPage: React.FC = () => {
 
   const handleSubscription = async () => {
     try {
+        
       await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/subscriptions/custom`,
         { subscriptionType: type, quantity},
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log(quantity)
       setSubscriptionSuccess(true);
     } catch (error) {
       console.error('Error updating subscription:', error);
@@ -102,17 +104,17 @@ const PaymentPage: React.FC = () => {
               <p>Selected quantity: {quantity}</p>
               <div className="fillDetails">
                 <div className="userDetails">
-                  <input type="text" placeholder="Full Name" />
+                  <input type="text" placeholder="Full Name" required/>
                   <br />
-                  <input type="text" placeholder="Email Id" />
+                  <input type="text" placeholder="Email Id" required/>
                 </div>
                 <div>
                   <p className="enterDetails">Enter your payment details</p>
                   <hr />
-                  <input type="text" className="cardNo" placeholder="Card number" />
+                  <input type="text" className="cardNo" placeholder="Card number" required/>
                   <br />
-                  <input type="text" placeholder="Month & Year" />
-                  <input type="text" placeholder="CVV Code" />
+                  <input type="text" placeholder="Month & Year" required/>
+                  <input type="text" placeholder="CVV Code" required/>
                 </div>
               </div>
               <div className="payBtnBox">

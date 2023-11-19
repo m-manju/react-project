@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddBookForm: React.FC = () => {
     const [subscriptionSuccess, setSubscriptionSuccess] = useState<boolean>(false);
@@ -11,6 +12,7 @@ const AddBookForm: React.FC = () => {
     publication_year: '',
     image: null as File | null,
   });
+const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -83,9 +85,12 @@ const AddBookForm: React.FC = () => {
       <button type="submit"  className='submitButton'>Add Book</button>
     </form>
     {subscriptionSuccess && (
+      <div className='viewPlan'>
         <div className="subscription-success-message">
           Book added successfully! 🎉
         </div>
+        <button id='viewPlanBtn'  onClick={() => navigate('/books')}> View all Books</button>
+      </div>
       )}
     </div>
   );

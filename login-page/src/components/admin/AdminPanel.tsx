@@ -38,11 +38,11 @@ const AdminPanel: React.FC = () => {
           <h3>Admin Login</h3>
           <form className='formClass'>
             <label> Full Name:
-             <input type="text" value={loginData.full_name}onChange={(e) => setLoginData({ ...loginData, full_name: e.target.value })}/>
+             <input type="text" value={loginData.full_name}onChange={(e) => setLoginData({ ...loginData, full_name: e.target.value })} required/>
             </label>
             <br />
             <label> Password:
-              <input type="password" value={loginData.password} onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}/>
+              <input type="password" value={loginData.password} onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} required/>
             </label>
             <br />
             <button type="button" onClick={handleLoginAdmin}>Login</button>

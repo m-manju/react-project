@@ -3,8 +3,6 @@ import Header from '../components/header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import SubscriptionPlans from '../components/SubscriptionPlans';
-import CreateSubscriptionPlan from '../components/admin/SubscriptionPlans'; 
-import AddBookForm from '../components/admin/AddBook';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -38,10 +36,6 @@ const Home: React.FC = () => {
           </div>
         </div>
         <SubscriptionPlans />
-        <div className='adminActivity container'>
-          {adminToken && <CreateSubscriptionPlan />}
-          {adminToken && <AddBookForm />}
-        </div>
       </div>
       <Footer/>
     </>

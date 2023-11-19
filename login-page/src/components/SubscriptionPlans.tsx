@@ -31,14 +31,27 @@ const SubscriptionPlans: React.FC = () => {
         { headers: { Authorization: `Bearer ${adminToken}`  }, data: { newPlanId: newPlanId }}
       );
       console.log(response.data.message);
+      fetchSubscriptionPlans();
     } catch (error) {
       console.error('Error deleting subscription plan:', error);
     }
   };
+  const fetchSubscriptionPlans = () => {
+    const authToken = adminToken ? `Bearer ${adminToken}` : `Bearer ${token}`;
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
+        headers: { Authorization: authToken },
+      })
+      .then((response) => {
+        setPlans(response.data.subscriptions || []);
+      })
+      .catch((error) => {
+        console.error('Error fetching subscription plans:', error);
+      });
+  };
 
   useEffect(() => {
     const authToken = adminToken ? `Bearer ${adminToken}` : `Bearer ${token}`;
-
     axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, 
     { headers: { Authorization: authToken } })
       .then(response => {
@@ -64,7 +77,7 @@ const SubscriptionPlans: React.FC = () => {
              {adminToken && (
               <div className='fordelete'>
                 <button onClick={() => handleDeletePlan(plan.id)}>Delete Plan</button>
-                <input type="number" placeholder="New Plan ID" onChange={(e) => setNewPlanId(Number(e.target.value))}/>
+                <input type="number" placeholder="New Plan ID" onChange={(e) => setNewPlanId(Number(e.target.value))} required/>
               </div>
             )}
           </li>
@@ -76,4 +89,3 @@ const SubscriptionPlans: React.FC = () => {
 };
 
 export default SubscriptionPlans;
-

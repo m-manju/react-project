@@ -10,6 +10,7 @@ import AdminLogin from './components/admin/AdminPanel';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Payment from './components/Paymentpage';
+import Admin from './components/admin/AdminPage';
 
 
 const App: React.FC = () => {
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/payment/:quantity/:type/:total" element={<Payment/>} />
         <Route path="/adminLogin" element={<AdminLogin />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
     </Provider>

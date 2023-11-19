@@ -22,8 +22,6 @@ interface Book {
 
 const Books: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  const [editBook, setEditBook] = useState<Book | null>(null);
-  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,17 +33,6 @@ const Books: React.FC = () => {
     console.log(`Book with ID ${book.id}, ${book.bookName} added to the cart.`);
   };
 
-  const openEditModal = (book: Book) => {
-    console.log('Editing book:', book);
-    setEditBook(book);
-    setEditModalOpen(true);
-  };
-  
-  const closeEditModal = () => {
-    setEditBook(null);
-    setEditModalOpen(false);
-  };
-
   const handleDelete = async (bookId: number) => {
     try {
       const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/adminBooks/delete/${bookId}`, {
@@ -54,6 +41,7 @@ const Books: React.FC = () => {
 
       if (response.data.success) {
         console.log('Book deleted successfully');
+        fetchBooks();
       } else {
         console.error('Failed to delete book');
       }
@@ -62,48 +50,19 @@ const Books: React.FC = () => {
     }
   };
 
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-  
-    setEditBook((prevEditBook) => ({
-      ...prevEditBook!,
-      [name]: name === 'publicationYear'? parseInt(value, 10) : value,
-    }));
-  };  
-  
-  const handleEditSubmit = async () => {
+  const fetchBooks = async () => {
     try {
-      console.log('Editing book ID:', editBook!.id);
-  
-      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/adminBooks/edit/${editBook!.id}`,
-        { ...editBook },
-        { headers: { Authorization: `Bearer ${adminToken}` } }
-      ).then(response => {
-        console.log(adminToken);
-      })
-      .catch(error => {
-        console.error('Error  editing book:', error);
-      })
-  
-      console.log('Edit response:', response);
-      console.log(adminToken);
-      closeEditModal();
-    } catch (error: any) {
-      console.error('Error editing book:', error);
-      console.error('Full error object:', error);
-      if (error.response) {
-        console.error('Response data:', error.response.data);
-        console.error('Response status:', error.response.status);
-        console.error('Response headers:', error.response.headers);
-      } else if (error.request) {
-        console.error('No response received:', error.request);
-      } else {
-        console.error('Error setting up the request:', error.message);
-      }
+      const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
+
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
+        headers,
+      });
+      setBooks(response.data?.books || []);
+      console.log('fetching books');
+    } catch (error) {
+      console.error('Error fetching books:', error);
     }
   };
-  
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -145,12 +104,7 @@ const Books: React.FC = () => {
               {book.image_url && <img src={book.image_url} alt={`Cover of ${book.bookName}`}  className='bookImage' />}
             </div>
             {adminToken && (
-            <>
-              <button className="addToCartBtn" onClick={() => openEditModal(book)}>
-                 Edit</button>
-              <button className="addToCartBtn" onClick={() => handleDelete(book.id)}>
-                 Delete</button>
-            </>
+              <button className="addToCartBtn" onClick={() => handleDelete(book.id)}>Delete</button>
             )}
           </div>
         ))}</div>
@@ -158,28 +112,6 @@ const Books: React.FC = () => {
         <Sidebar />
       </div>
 
-      {editModalOpen && (
-        <div className="edit-modal">
-          <h3>Edit Book</h3>
-          <form>
-            <label>Book Name:</label>
-            <input type="text" name="bookName" value={editBook?.bookName} onChange={handleInputChange}/>
-            <br />
-            <label>Description:</label>
-            <input type="text" name="description" value={editBook?.description} onChange={handleInputChange} />
-            <br />
-            <label>Publication Year:</label>
-            <input type="number" name="publicationYear"value={editBook?.publication_year} onChange={handleInputChange}/>
-            <br />
-            <button type="button" onClick={handleEditSubmit}>
-              Save Changes
-            </button>
-            <button type="button" onClick={closeEditModal}>
-              Cancel
-            </button>
-          </form>
-        </div>
-      )}
       <Footer />
     </div>
   );
