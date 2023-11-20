@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface UserDetails {
   username: string;
@@ -23,7 +23,7 @@ const PaymentPage: React.FC = () => {
   const [subscriptionSuccess, setSubscriptionSuccess] = useState<boolean>(false);
   const [allSubscriptionPlans, setAllSubscriptionPlans] = useState<SubscriptionPlan[]>([]);
   const navigate = useNavigate();
-  const { quantity , type, total } = useParams();
+  const { quantity, type, total } = useParams();
   const token = localStorage.getItem('token');
   const adminToken = localStorage.getItem('adminToken');
 
@@ -34,7 +34,7 @@ const PaymentPage: React.FC = () => {
   }, [navigate, token, adminToken]);
 
   console.log(allSubscriptionPlans, activeSubscription);
-  console.log(quantity,type, total);
+  console.log(quantity, type, total);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,8 +55,9 @@ const PaymentPage: React.FC = () => {
   useEffect(() => {
     if (token) {
       try {
-        const decoded: UserDetails = jwtDecode(token) as UserDetails;
-        setUserDetails(decoded);
+        const decodedToken: UserDetails = jwtDecode(token);
+        setUserDetails(decodedToken);
+
         axios
           .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
             headers: { Authorization: `Bearer ${token}` },
@@ -65,7 +66,7 @@ const PaymentPage: React.FC = () => {
             setAllSubscriptionPlans(response.data.subscriptions || []);
 
             if (response.data.subscriptions && response.data.subscriptions.length > 0) {
-              setSelectedPlan(response.data.subscriptions);
+              setSelectedPlan(response.data.subscriptions); 
             }
           })
           .catch((error) => {
@@ -80,13 +81,11 @@ const PaymentPage: React.FC = () => {
 
   const handleSubscription = async () => {
     try {
-        
       await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/subscriptions/custom`,
-        { subscriptionType: type, quantity},
+        { subscriptionType: type, quantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(quantity)
       setSubscriptionSuccess(true);
     } catch (error) {
       console.error('Error updating subscription:', error);
@@ -104,23 +103,23 @@ const PaymentPage: React.FC = () => {
               <p>Selected quantity: {quantity}</p>
               <div className="fillDetails">
                 <div className="userDetails">
-                  <input type="text" placeholder="Full Name" required/>
+                  <input type="text" placeholder="Full Name" required />
                   <br />
-                  <input type="text" placeholder="Email Id" required/>
+                  <input type="text" placeholder="Email Id" required />
                 </div>
                 <div>
                   <p className="enterDetails">Enter your payment details</p>
                   <hr />
-                  <input type="text" className="cardNo" placeholder="Card number" required/>
+                  <input type="text" className="cardNo" placeholder="Card number" required />
                   <br />
-                  <input type="text" placeholder="Month & Year" required/>
-                  <input type="text" placeholder="CVV Code" required/>
+                  <input type="text" placeholder="Month & Year" required />
+                  <input type="text" placeholder="CVV Code" required />
                 </div>
               </div>
               <div className="payBtnBox">
                 <p>pay now</p>
                 <button className="payBtn" onClick={handleSubscription}>
-                 Pay ${total}
+                  Pay ${total}
                 </button>
               </div>
             </div>

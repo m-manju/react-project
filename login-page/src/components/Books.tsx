@@ -49,11 +49,10 @@ const Books: React.FC = () => {
       console.error('Error deleting book:', error);
     }
   };
-
-  const fetchBooks = async () => {
+  
+  const fetchBooks = React.useCallback(async () => {
     try {
       const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
-
       const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
         headers,
       });
@@ -62,28 +61,15 @@ const Books: React.FC = () => {
     } catch (error) {
       console.error('Error fetching books:', error);
     }
-  };
+  }, [adminToken, token, setBooks]);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
-  
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
-          headers,
-        });
-        setBooks(response.data?.books || []);
-        console.log('fetching books');
-      } catch (error) {
-        console.error('Error fetching books:', error);
-      }
-    };
     if (!token && !adminToken) {
       navigate('/login');
     } else {
       fetchBooks(); 
     }
-  }, [navigate, token,adminToken]);
+  }, [navigate, token,adminToken,fetchBooks]);
 
   return (
     <div>

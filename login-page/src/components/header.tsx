@@ -21,12 +21,13 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const decoded: UserDetails = jwtDecode(token) as UserDetails;
-        setUserDetails(decoded);
+        const decodedToken: any = jwtDecode(token);
+        const userDetails = mapDecodedTokenToUserDetails(decodedToken);
+        setUserDetails(userDetails);
       } catch (error) {
         console.error('Error in decoding the token:', error);
       }
-    } 
+    }
   }, [navigate]);
 
   const handleLogout = () => {
@@ -39,26 +40,26 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
   return (
     <>
       <header>
-      <div className="main-header">
-        <div className="top-section container">
-          <div className="left-section ">
-            <div className="logo-section">
-              <div className="logo">EpicEntertain</div>
-              <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
+        <div className="main-header">
+          <div className="top-section container">
+            <div className="left-section ">
+              <div className="logo-section">
+                <div className="logo">EpicEntertain</div>
+                <p className="caption">Empowering Knowledge, One Page at a Time!!</p>
+              </div>
             </div>
-          </div>
             {userDetails && (
               <div className="user-details">
                 <div className="user-icon">
-                  <i className="fas fa-user"  style={{ color: 'white' }}></i>
+                  <i className="fas fa-user" style={{ color: 'white' }}></i>
                 </div>
                 <div>
-                <h2>Welcome {userDetails.username}!</h2>
-                <p>Email: {userDetails.email}</p>
+                  <h2>Welcome {userDetails.username}!</h2>
+                  <p>Email: {userDetails.email}</p>
                 </div>
               </div>
             )}
-        </div>
+          </div>
 
           {showNavigation && (
             <div className="bottom-section container">
@@ -68,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
                   <li onClick={() => navigate('/about')}>About</li>
                   <li onClick={() => navigate('/books')}>Books</li>
                   <li onClick={() => navigate('/contacts')}>Contacts</li>
-                  { adminToken && (<li onClick={() => navigate('/admin')}>Admin Activities</li>)}
+                  {adminToken && (<li onClick={() => navigate('/admin')}>Admin Activities</li>)}
                 </ul>
                 <button className='LogoutButton' onClick={handleLogout}>Log Out</button>
               </nav>
@@ -78,6 +79,14 @@ const Header: React.FC<HeaderProps> = ({ showNavigation = true }) => {
       </header>
     </>
   );
+}
+
+const mapDecodedTokenToUserDetails = (decodedToken: any): UserDetails => {
+  return {
+    username: decodedToken.username,
+    email: decodedToken.email,
+    id: decodedToken.id,
+  };
 }
 
 export default Header;

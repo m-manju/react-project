@@ -35,8 +35,7 @@ const SubscriptionForm: React.FC = () => {
 
   const authToken = adminToken ? `Bearer ${adminToken}` : `Bearer ${token}`;
 
-
-  const handlePayment = async() => {
+  const handlePayment = async () => {
     if (subscriptionType === '') {
       setSubscriptionTypeSelected(false);
     } else {
@@ -82,8 +81,8 @@ const SubscriptionForm: React.FC = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    
+ 
+useEffect(() => {
   const fetchData = async () => {
     try {
       const userId = userDetails?.id;
@@ -95,9 +94,9 @@ const SubscriptionForm: React.FC = () => {
       console.error('Error fetching active subscription:', error);
     }
   };
-    fetchData(); 
-  }, [userDetails, selectedPlan, authToken]);
 
+  fetchData();
+}, [userDetails, selectedPlan, authToken]);
 
   return (
     <div className="createForm container">
