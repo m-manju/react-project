@@ -57,13 +57,21 @@ const SubscriptionForm: React.FC = () => {
       }
     }
   };
+  const mapDecodedTokenToUserDetails = (decodedToken: any): UserDetails => {
+    return {
+      username: decodedToken.username,
+      email: decodedToken.email,
+      id: decodedToken.id,
+    };
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const decoded: UserDetails = jwtDecode(token) as UserDetails;
-        setUserDetails(decoded);
+        const decodedToken: any = jwtDecode(token);
+        const userDetails = mapDecodedTokenToUserDetails(decodedToken);
+        setUserDetails(userDetails);
         axios
           .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
             headers: { Authorization: `Bearer ${token}` },
