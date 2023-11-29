@@ -1,0 +1,850 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Open Sans', sans-serif;
+}
+.container{
+  max-width: 1350px;
+  margin: 0 auto; 
+  position: relative;
+  width: 100%;
+}
+/* ------------------------ home --------------------------- */
+.blackBox{
+  background-color: #000;
+}
+.image-section {
+  position: relative;
+  overflow: hidden;
+  max-height: 400px;
+}
+.background-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+.content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4); 
+}
+.text-section{
+  max-width: 400px;
+}
+.cntnt-section {
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #000;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-8 {
+  background-color: #f0ecfc;
+  background-image: linear-gradient(315deg, #f0ecfc 0%, #726a66 74%);
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-8 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  font-weight: bold;
+}
+.btn-8:before,
+.btn-8:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #c0bdc3;
+  transition: all 0.3s ease;
+}
+.btn-8:before{
+   height: 0%;
+   width: 2px;
+}
+.btn-8:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-8:hover:before {
+  height: 100%;
+}
+.btn-8:hover:after {
+  width: 100%;
+}
+.btn-8:hover{
+  background: transparent;
+}
+.btn-8 span:hover{
+  color: #a79fa7;
+}
+.btn-8 span:before,
+.btn-8 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #a79fa7;
+  transition: all 0.3s ease;
+}
+.btn-8 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-8 span:after {
+  height: 2px;
+  width: 0%;
+}
+.btn-8 span:hover:before {
+  height: 100%;
+}
+.btn-8 span:hover:after {
+  width: 100%;
+}
+  
+
+h2, p{
+  color: rgb(234, 229, 229);
+}
+h2 {
+  font-size: 2.3em;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-weight: 400;
+}
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+/* --------------------- header ------------------ */
+.user-details h2, .user-details p{
+  color: #efeeef;
+}
+.logo-section p{
+  color: #efeeef;
+}
+.main-header {
+  padding: 20px;
+  background-color: #0b0b0b;
+}
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  color: whitesmoke;
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+}
+.caption {
+  font-style: italic;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.user-details {
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+}
+.user-details h2{
+  font-size: 16px;
+}
+.user-details p {
+  font-size: 12px;
+}
+.user-icon i{
+  padding: 10px 15px;
+  font-size: 30px;
+}
+.bottom-section {
+  background-color: #f0f0f6;
+  border-radius: 25px;
+  margin-top: 20px;
+}
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+.nav-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 450px;
+}
+.nav-list li {
+  cursor: pointer;
+  color: #1b191b;
+  padding: 2px ;
+}
+.nav-list li:hover {
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+.LogoutButton {
+  padding: 8px 36px;
+  margin-right: 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.LogoutButton:hover{
+  background-color: #2d2c31;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  padding: 8px 36px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.formDiv {
+  width: 340px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: relative;
+  margin-top: 80px;
+}
+.formDiv h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.formClass {
+  display: flex;
+  flex-direction: column;
+}
+.formClass label {
+  margin-bottom: 5px;
+  color: #333;
+}
+.formClass input[type="text"],
+.formClass input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.submitButton{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: #15141a;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 15px;
+} 
+.btnLink{
+  border: none;
+  background-color: #f9f9f9;
+  color: #2d2a3f;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 16px;
+}
+.btnLink:hover{
+  text-decoration: none;
+  background-color: #f9f9f9;
+}
+.formDiv p{
+  font-size: 13px;
+  color: #000;
+}
+span{
+  font-size: 13px;
+  color: red;
+}
+.formClass .submitButton:hover {
+  background-color: #b1b0b5;
+  color: black;
+}
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding-top: 10px;
+  height: 40px;
+} 
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-bottom p {
+  font-size: 12px;
+}  
+/* ---------- books --------- */
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #121517;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #393b3c;
+  }
+}
+.bookBox {
+  background-color: rgb(239, 239, 239);
+  padding: 20px;
+  margin: 20px;
+  align-items: center;
+  width: 400px;
+  box-shadow: 0px 0px 10px 0px #a8a4a4;
+}
+.addToCartBtn {
+  padding: 8px 16px;
+  background-color: #0b0c0d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.allBooks{
+  background-color: #fbfafc;
+  display: flex;
+  justify-content: space-around;
+}
+.allBooks h2{
+  padding: 20px;
+  color: rgb(14, 15, 16);
+  text-align: center;
+  margin-top: 20px;
+} 
+.bookName{
+  font-weight: bold;
+}
+.bookBox p{
+  color: #000;
+  font-size: 15px;
+}
+.BookSide1{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.bookDetails{
+  display: flex;
+}
+.bookImage{
+  max-width: 160px;
+  height: 200px;
+  object-fit: fill;
+  margin-left: 10px;
+}
+/* ---------- Sidebar --------- */
+.sidebar {
+  min-width: 300px;
+  padding-left: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} .sidebar h3{
+  padding-top: 40px;
+}
+.sidebar ul{
+  padding: 10px 0;
+}
+.sidebar li{
+  list-style: none;
+  color: #3c3c42;
+  padding-top: 10px;
+  font-size: 14px;
+}
+.sidebar .emptyCart{
+  color: rgb(70, 65, 65);
+  font-size: 14px;
+}
+.sidebar p{
+  color: #000;
+}
+.cartBtn{
+  padding: 0 10px;
+  margin: 0 10px ;
+} 
+.cartList p{
+  margin: 0;
+  padding: 10px;
+  font-weight: bold;
+}
+.cartList hr{
+  margin: 10px;
+  width: 100px;
+}
+/* --------- subscription plans ------------- */
+.subscriptionPlans {
+  text-align: center;
+  font-size: 26px;
+  padding-top: 80px;
+  background-color: rgb(255, 254, 254);
+}
+.subscriptionPlans ul{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.subscriptionPlans h3{
+  padding-bottom: 30px;
+}
+.subscription-plan {
+  background-color: rgb(254, 254, 255);
+  margin: 20px 0;
+  align-items: center;
+  list-style-type: none;
+  box-shadow: 1px 1px 30px 1px  #d1d1d1;
+  cursor: pointer;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.subscription-plan:hover {
+  box-shadow: 10px 10px 30px 0px  #d1d1d1;
+}
+.subscription-plan .price{
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.subscribeNow2{
+  font-size: 26px;
+}
+.subscriptionBox{
+  margin-top: 5%;
+}
+.choose{
+  margin-top: 50px;
+}
+.subscriptionBox select{
+  margin-right: 10px;
+  height: 25px;
+  width: 130px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.subscriptionBox input{
+  width: 45px;
+  margin-left: 10px;
+  height: 25px;
+}
+.subscription-plan p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.subscription-plan p {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+}
+.subscription-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.subscribBox{
+  margin-left: 100px;
+}
+.subscription-form button {
+  background-color: #4b4084;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.labelQuantity{
+  font-size: 16px;
+}
+.viewPlan{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#viewPlanBtn{
+  background-color: white;
+  color: #000;
+  font-size: 12px;
+  padding: 5px;
+  margin-top: 15px;
+}
+#viewPlanBtn:hover{
+  background-color: rgb(79, 57, 57);
+  color: #c8c1c1;
+}
+/* ------------------- payment ------------- */
+.payment{
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.payBox{
+  box-shadow: 1px 1px 10px 0 #7c7b7b;
+  padding: 20px;
+  min-width: 450px;
+}
+.payBox p{
+  font-size: 15px;
+  color: #000;
+  margin-top: 20px;
+  text-align: center;
+}
+.payBox h4{
+  font-size: 20px;
+  color: #000;
+  margin-top: 20px;
+  text-align: center;
+}
+.enterDetails{
+  margin: 10px 0 6px 0;
+}
+.payBox hr{
+  margin: 0 50px 10px 50px;
+}
+.payBox input{
+  border: none;
+  box-shadow: 1px 1px 6px 0 #b1b0b0;
+  border-radius: 50px;
+  height: 30px;
+  margin: 10px;
+  text-align: center;
+}
+.userDetails input{
+  width: 300px;
+}
+.cardNo{
+  width: 350px;
+}
+.fillDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.payBtnBox{
+  background-color: #efefef;
+  height: 60px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.payBtnBox  p{
+  margin-left: 180px;
+  font-weight: bold;
+}
+.payBtn{
+  background-color: green;
+  float: right;
+  margin: 10px;
+}
+.afterSubscription{
+  display: flex;
+  justify-content: space-around;
+}
+.subscription-success-message{
+  text-align: center;
+  width: 300px;
+  color: #080707;
+  font-size: 13px;
+}
+.goHome{
+  font-size: 13px;
+  color: #f0eeee;
+  background-color: rgb(53, 48, 48);
+  height: 25px;
+  padding: 5px;
+}
+.goHome:hover{
+  color: #141414;
+  background-color: rgb(186, 184, 184);
+}
+/* ---------------subscribBox---------------- */
+.subscribBox button {
+  background-color: #282525;
+  border: whitesmoke 2px solid;
+  font-size: 16px;
+  border-radius: 30px;
+  padding: 7px; width: 140px;
+}
+.subscribBox button:hover {
+  background-color: #f5f0f0;
+  color: #000;
+}
+.activeSubscription h4{
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.activeSubscription p{
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.subscription-controls{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subscription-controls select{
+  border-radius: 30px;
+  text-align: center;
+  height: 30px;
+}
+.subscription-controls input{
+  border-radius: 30px;
+  text-align: center;
+  padding-left: 10px;
+  height: 30px;
+}
+.subscription-error-message{
+  color: #ff0000;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.createForm{
+  padding: 60px;
+}
+.black-subscribe{
+  background-color: #000;
+  border-radius: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 50px;
+}
+.createForm h3, .createForm label{
+  color: whitesmoke;
+}.createForm select{
+  color: rgb(54, 52, 52);
+}
+.subscribeNow h3{
+  margin-top: 5%;
+  font-size: 50px;
+}
+.subscribeNow p{
+  font-size: 13px;
+  max-width: 340px;
+  justify-content: baseline;
+  display: flex;
+}
+.subscriptionForm button{
+  max-width: 200px;
+  margin-top: 10px;
+}
+/* ---------------about------------------ */
+.about {
+  text-align: center;
+  display: flex;
+}
+.about img{
+  width: 200px;
+  margin: 30px;
+}
+.about-section{
+  margin-top: 40px;
+}
+.about h2{
+  font-size: 2em;
+  color: #333;
+}
+.about h3{
+  color: #000;
+  margin-top: 10px;
+}
+.about p{
+  font-size: 1.15em;
+  color: #383737;
+  line-height: 1.5;
+  margin: 20px 0;
+}
+.about  ul{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about  li{
+  list-style-type: circle;
+  text-align: left;
+  margin-top: 15px;
+  max-width: 600px;
+  line-height: 1.6;
+}
+.aboutUl h3{
+  color: whitesmoke;
+}
+.aboutUl{
+  background-color: #5c5d5e;
+  padding: 20px 30px;
+  color: whitesmoke;
+}
+/* ------- contact ------- */
+.contact-section {
+  text-align: center;
+  background-image: linear-gradient(315deg, #f0ecfc 0%, #000 74%);
+  font-family: 'Times New Roman', Times, serif;
+}
+.contact-section h2 {
+  padding-top: 40px;
+}
+.contact-section p, .contact-section h3,.contact-section h2 {
+  color: #e5e2e2;
+}
+.contact-details {
+  padding-top: 20px;
+  line-height: 1.6;
+}
+.contact-details strong {
+  font-weight: bold;
+}
+.social-media-icons {
+  margin: 20px;
+}
+.social-media-icons a {
+  display: inline-block;
+  margin-right: 30px;
+  font-size: 24px;
+  width: 40px;
+  height: 32px;
+  color: #f9f8f8;
+}
+.social-media-icons a:hover {
+  color: #0b0909;
+  border-radius: 50%;
+}
+.viewAll {
+  padding: 10px 20px;
+  border: none;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.viewAll:hover {
+  background-color: #f3f5f6;
+  color: #000;
+}
+/* ----------------------------------------- */
+.adminActivity{
+  display: flex;
+  justify-content: space-evenly;
+}
+.createAll {
+  margin: 60px;
+  background-color: #edeaea;
+  padding: 20px;
+  border-radius: 8px;
+  border: #000 1.3px solid;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.createAll h3{
+  text-align: center;
+  padding: 20px 0;
+  font-size: 26px;
+}
+.subscriptionCreate {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-top: 20px;
+}
+.subscriptionCreate label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+.subscriptionCreate input {
+  width: 150px;
+  height: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.subscriptionCreate button.submitButton {
+  background-color: #101111;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 200px;
+}
+
+.subscriptionCreate button.submitButton:hover {
+  background-color: #313134;
+}
+.label-group .imageInput{
+  height: 40px;
+  width: 200px;
+  margin-left: 10px;
+}
+.fordelete button {
+  height: 35px;
+  font-size: 13px;
+}
+/* ------------- edit--------------- */
+.edit-modal{
+  background-color: #080707;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
