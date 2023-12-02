@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate, useParams } from 'react-router-dom';
+import { get ,post} from '../apiUtils';
 
 interface UserDetails {
   username: string;
@@ -24,7 +24,7 @@ const PaymentPage: React.FC = () => {
   const [allSubscriptionPlans, setAllSubscriptionPlans] = useState<SubscriptionPlan[]>([]);
   const navigate = useNavigate();
   const { quantity, type, total } = useParams();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token')?? '';
   const adminToken = localStorage.getItem('adminToken');
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const PaymentPage: React.FC = () => {
     const fetchData = async () => {
       try {
         const userId = userDetails?.id;
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/active/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setActiveSubscription(response.data.responseObject);
+        if (userId) {
+          const response = await get(`/subscriptions/active/${userId}`, token); 
+          setActiveSubscription(response?.responseObject || null);
+        }
       } catch (error) {
         console.error('Error fetching active subscription:', error);
       }
@@ -53,39 +53,33 @@ const PaymentPage: React.FC = () => {
   }, [token, userDetails]);
 
   useEffect(() => {
-    if (token) {
+    const fetchSubscriptionData = async () => {
       try {
         const decodedToken: UserDetails = jwtDecode(token);
         setUserDetails(decodedToken);
-
-        axios
-          .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((response) => {
-            setAllSubscriptionPlans(response.data.subscriptions || []);
-
-            if (response.data.subscriptions && response.data.subscriptions.length > 0) {
-              setSelectedPlan(response.data.subscriptions); 
-            }
-          })
-          .catch((error) => {
-            console.error('Error fetching subscription plans:', error);
-            console.error('Error updating subscription:', error.response);
-          });
+  
+        const response = await get('/subscriptions/plans', token);
+  
+        setAllSubscriptionPlans(response.subscriptions || []);
+  
+        if (response.subscriptions && response.subscriptions.length > 0) {
+          setSelectedPlan(response.subscriptions[0]);
+        }
       } catch (error) {
         console.error('Error in decoding the token:', error);
       }
+    };
+  
+    if (token) {
+      fetchSubscriptionData();
     }
   }, [token]);
+  
+
 
   const handleSubscription = async () => {
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/subscriptions/custom`,
-        { subscriptionType: type, quantity },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await post('/subscriptions/custom', { subscriptionType: type, quantity }, token);
       setSubscriptionSuccess(true);
     } catch (error) {
       console.error('Error updating subscription:', error);

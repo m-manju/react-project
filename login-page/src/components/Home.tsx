@@ -1,4 +1,3 @@
-import React, { useEffect }  from 'react';
 import Header from '../components/header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -6,14 +5,6 @@ import SubscriptionPlans from '../components/SubscriptionPlans';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token'); 
-  const adminToken = localStorage.getItem('adminToken');
-
-  useEffect(() => {
-    if (!token && !adminToken) {
-      navigate('/login');
-    }
-  }, [navigate, token, adminToken]);
 
   const handleAllBooks =() => {
     navigate('/books');

@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import Header from '../components/header';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,14 +7,6 @@ import Footer from '../components/Footer';
 
 const Contact: React.FC = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  const adminToken = localStorage.getItem('adminToken');
-
-  useEffect(() => {
-    if (!token && !adminToken) {
-      navigate('/login');
-    }
-  }, [navigate, token, adminToken]);
 
   const handleAllBooks = () => {
     navigate('/books');

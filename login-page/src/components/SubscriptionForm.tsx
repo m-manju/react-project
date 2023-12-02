@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import { get } from '../apiUtils';
 
 interface UserDetails {
   username: string;
@@ -27,14 +27,9 @@ const SubscriptionForm: React.FC = () => {
 
   const token = localStorage.getItem('token');
   const adminToken = localStorage.getItem('adminToken');
-  useEffect(() => {
-    if (!token && !adminToken) {
-      navigate('/login');
-    }
-  }, [navigate, token, adminToken]);
 
+  console.log(selectedPlan);
   const authToken = adminToken ? `Bearer ${adminToken}` : `Bearer ${token}`;
-
   const handlePayment = async () => {
     if (subscriptionType === '') {
       setSubscriptionTypeSelected(false);
@@ -47,16 +42,16 @@ const SubscriptionForm: React.FC = () => {
         navigate(`/payment/${quantity}/${selectedPlan.type}/${selectedPlan.price * quantity}`);
         try {
           const userId = userDetails?.id;
-          const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/active/${userId}`, {
-            headers: { Authorization: authToken },
-          });
-          setActiveSubscription(response.data.responseObject);
+          const response = await get(`/subscriptions/active/${userId}`, adminToken ?? token ?? '');
+          fetchData();
+          setActiveSubscription(response.responseObject);
         } catch (error) {
           console.error('Error fetching active subscription:', error);
         }
       }
     }
   };
+  
   const mapDecodedTokenToUserDetails = (decodedToken: any): UserDetails => {
     return {
       username: decodedToken.username,
@@ -66,46 +61,48 @@ const SubscriptionForm: React.FC = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const decodedToken: any = jwtDecode(token);
-        const userDetails = mapDecodedTokenToUserDetails(decodedToken);
-        setUserDetails(userDetails);
-        axios
-          .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((response) => {
-            setAllSubscriptionPlans(response.data.subscriptions || []);
-            console.log('Fetched plans:', response.data.subscriptions);
-          })
-          .catch((error) => {
+    const fetchData = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const decodedToken: any = jwtDecode(token);
+          const userDetails = mapDecodedTokenToUserDetails(decodedToken);
+          setUserDetails(userDetails);
+  
+          try {
+            const response = await get('/subscriptions/plans', token);
+            setAllSubscriptionPlans(response.subscriptions || []);
+            console.log('Fetched plans:', response.subscriptions);
+          } catch (error) {
             console.error('Error fetching subscription plans:', error);
-          });
-      } catch (error) {
-        console.error('Error in decoding the token:', error);
+          }
+        } catch (error) {
+          console.error('Error in decoding the token:', error);
+        }
       }
-    }
-  }, [token]);
-
- 
-useEffect(() => {
-  const fetchData = async () => {
+    };
+  
+    fetchData();
+  }, []); 
+  
+  const fetchData = useCallback(async () => {
     try {
       const userId = userDetails?.id;
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/active/${userId}`, {
-        headers: { Authorization: authToken },
-      });
-      setActiveSubscription(response.data.responseObject);
+      if (userId !== undefined) {
+        console.log('Fetching active subscription for user ID:', userId);
+  
+        const response = await get(`/subscriptions/active/${userId}`, authToken);
+        console.log('API Response:', response);
+  
+        setActiveSubscription(response.responseObject);
+      } else {
+        console.error('User ID is undefined. Cannot fetch active subscription.');
+      }
     } catch (error) {
       console.error('Error fetching active subscription:', error);
     }
-  };
-
-  fetchData();
-}, [userDetails, selectedPlan, authToken]);
-
+  }, [userDetails, authToken]);
+  
   return (
     <div className="createForm container">
       {token && (
@@ -159,7 +156,7 @@ useEffect(() => {
                 <div className="activeSubscription">
                   <h4>Active Subscription Information</h4>
                   <p>Your subscription ends on {activeSubscription.subscriptions_end}</p>
-                  <p>Remaining Days - {activeSubscription.remaining_days}</p>
+                  <p>Remaining Days - "{activeSubscription.remaining_days}"</p>
                   {activeSubscription.has_expired && <p>Subscription has expired. Renew now!</p>}
                 </div>
               )}

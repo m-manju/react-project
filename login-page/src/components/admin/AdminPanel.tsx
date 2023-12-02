@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../header';
+import { post } from '../../apiUtils';
 
 const AdminPanel: React.FC = () => {
   const [adminToken, setAdminToken] = useState<string | null>(null);
@@ -16,14 +16,10 @@ const AdminPanel: React.FC = () => {
 
   const handleLoginAdmin = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/loginAdmin`,
-        loginData
-      );
+      const response = await post('/admin/loginAdmin', loginData);
       const { token } = response.data;
       localStorage.setItem('adminToken', token);
-      setAdminToken(token);
-            navigate('/');
+      navigate('/');
     } catch (error) {
       console.error('Error logging in admin:', error);
     }

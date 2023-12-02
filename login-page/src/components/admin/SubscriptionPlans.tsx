@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { post, get } from '../../apiUtils';
 
 
 interface SubscriptionPlan {
@@ -26,38 +26,42 @@ const CreateSubscriptionPlan: React.FC = () => {
     setPlanData({ ...planData, [name]: value });
   };
 
-  const adminToken = localStorage.getItem('adminToken');
+  const adminToken = localStorage.getItem('adminToken') ?? '';
   console.log(plans);
+  const fetchSubscriptionPlans = useCallback(async () => {
+    try {
+      const response = await get('/subscriptions/plans', adminToken);
+
+      if (response.success) {
+        setPlans(response.subscriptions || []);
+      } else {
+        console.error('Failed to fetch subscription plans');
+      }
+    } catch (error) {
+      console.error('Error fetching subscription plans:', error);
+    }
+  }, [adminToken]);
 
   const handleCreatePlan = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/adminSubscriptions/createPlan`,
-        planData,
-        { headers: { Authorization: `Bearer ${adminToken}` } }
-      );
+      const response = await post('/adminSubscriptions/createPlan', planData, adminToken);
+
+      if (response.success) {
         setSubscriptionSuccess(true);
         console.log('Subscription plan created successfully');
         fetchSubscriptionPlans();
-        console.log(response.data.success);
+      } else {
+        console.error('Failed to create a subscription plan');
+      }
     } catch (error) {
-      console.error('Error creating subscription plan:', error);
+      console.error('Error creating a subscription plan:', error);
     }
   };
-  
 
-  const fetchSubscriptionPlans = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/subscriptions/plans`, {
-        headers: { Authorization: adminToken },
-      })
-      .then((response) => {
-        setPlans(response.data.subscriptions || []);
-      })
-      .catch((error) => {
-        console.error('Error fetching subscription plans:', error);
-      });
-  };
+  useEffect(() => {
+    fetchSubscriptionPlans();
+  }, [adminToken, fetchSubscriptionPlans]);
+
   
   return (
     <div className="createAll container">
@@ -76,7 +80,6 @@ const CreateSubscriptionPlan: React.FC = () => {
         <div className="label-group">
         <label> Price: </label>
           <input type="number" name="price" value={planData.price} onChange={handleInputChange} required/>
-       
         </div>
         <div className="label-group">
         <label> Duration:</label>
