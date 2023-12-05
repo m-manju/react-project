@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/login';
 import Home from './components/Home';
 import Signup from './components/Signup';
@@ -12,23 +12,33 @@ import store from './redux/store';
 import Payment from './components/Paymentpage';
 import Admin from './components/admin/AdminPage';
 
-
 const App: React.FC = () => {
+  const isLoggedIn = () => {
+    const userToken = window.localStorage.getItem('token');
+    return !!userToken;
+  };
+
   return (
     <Provider store={store}>
-    <BrowserRouter>
-      <Routes> 
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/payment/:quantity/:type/:total" element={<Payment/>} />
-        <Route path="/adminLogin" element={<AdminLogin />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/"
+            element={isLoggedIn() ? <Home /> : <Navigate to="/login" />}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/books" 
+            element={isLoggedIn() ? <Books /> : <Navigate to="/login" />}/>
+          <Route path="/about"
+            element={isLoggedIn() ? <About /> : <Navigate to="/login" />}/>
+          <Route path="/contacts"
+            element={isLoggedIn() ? <Contacts /> : <Navigate to="/login" />}/>
+          <Route path="/payment/:quantity/:type/:total" 
+            element={isLoggedIn() ? <Payment /> : <Navigate to="/login" />}/>
+          <Route path="/adminLogin" element={<AdminLogin />} />
+          <Route path="/admin" 
+            element={isLoggedIn() ? <Admin /> : <Navigate to="/login" />}/>
+        </Routes>
+      </BrowserRouter>
     </Provider>
   );
 };

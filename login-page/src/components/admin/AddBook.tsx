@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { post } from '../../apiUtils';
 
 interface FormData {
   name: string;
@@ -27,8 +27,6 @@ const AddBookForm: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const adminToken = localStorage.getItem('adminToken');
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setFormData({ ...formData, image: e.target.files[0] });
@@ -38,7 +36,7 @@ const AddBookForm: React.FC = () => {
   const handleAddBook = async (e: React.FormEvent) => {
     e.preventDefault();
     const { name, description, author_id, isbn, publication_year, image } = formData;
-
+  
     const formDataForApi = new FormData();
     formDataForApi.append('name', name);
     formDataForApi.append('description', description);
@@ -48,20 +46,17 @@ const AddBookForm: React.FC = () => {
     if (image) {
       formDataForApi.append('image', image);
     }
-
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/adminBooks/addBook`,
-        formDataForApi,
-        { headers: { Authorization: `Bearer ${adminToken}` } }
-      );
+      const adminToken = localStorage.getItem('adminToken') ?? ''; 
+      const response = await post('/adminBooks/addBook', formDataForApi, adminToken);
+  
       setSubscriptionSuccess(true);
       console.log(response.data);
     } catch (error) {
       console.error('Error adding book:', error);
     }
   };
-
+  
   return (
     <div className="createAll container">
       <h3>Add New Books!!</h3>

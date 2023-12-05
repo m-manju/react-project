@@ -3,6 +3,7 @@ import { ItemType, incrementQuantity, decrementQuantity  } from '../redux/cart/c
 
 const Sidebar: React.FC = () => {
   const cartItems: ItemType[] = useSelector((state: any) => state.cart.cartItems);
+  const error: string | null = useSelector((state: any) => state.cart.error); 
   const dispatch = useDispatch();
 
   const handleIncrement = (id: number) => {
@@ -16,6 +17,7 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="sidebar">
       <div className='container'>
+        {error && <p className="error-message">{error}</p>}
         <h3>My Reading Room</h3>
         <br />
         <p>Reading-Plans</p>

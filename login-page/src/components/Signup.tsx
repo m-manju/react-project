@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import Header from '../components/header';
+import { post } from '../apiUtils';
 
 interface SignupPros {
   username: string;
@@ -23,10 +23,10 @@ const Signup: React.FC = () => {
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setSignupValues(value => ({ ...value, [event.target.name]: event.target.value }));
-    setErrors({ ...errors, [event.target.name]: '' }); 
+    setErrors({ ...errors, [event.target.name]: '' });
   };
 
-  const handleSignup = (event: FormEvent<HTMLFormElement>): void => {
+  const handleSignup = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const newErrors: ErrorValues = { username: '', email: '', password: '' };
     if (signupValues.username.trim() === '') {
@@ -41,23 +41,23 @@ const Signup: React.FC = () => {
     setErrors({ ...newErrors });
 
     if (!newErrors.username && !newErrors.email && !newErrors.password) {
-      axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/signup`, signupValues)
-      .then(res => {
-          console.log(res);
-          localStorage.setItem('token', res.data.token);
-          navigate('/login');
-          console.log('Successful signup');
-        })
-        .catch(err => {
-          if (err.response && err.response.status === 400) {
-            console.log("Username already taken, use any other name");
-            setErrors(prevErrors => ({ ...prevErrors, username: 'Username already taken, use any other name' }));
-          } else {
-            console.log("Error:", err);
-          }
-        });
+      try {
+        const response = await post('/auth/signup', signupValues);
+        console.log(response);
+        localStorage.setItem('token', response.data.token);
+        navigate('/login');
+        console.log('Successful signup');
+      } catch (error:any) {
+        if (error.response && error.response.status === 400) {
+          console.log("Username already taken, use any other name");
+          setErrors(prevErrors => ({ ...prevErrors, username: 'Username already taken, use any other name' }));
+        } else {
+          console.log("Error:", error);
+        }
+      }
     }
   };
+
 
   return (
     <>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Header from './header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
@@ -7,6 +6,7 @@ import './../App.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cart/cart';
+import { get, remove } from '../apiUtils';
 
 interface Book {
   id: number;
@@ -25,8 +25,7 @@ const Books: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  const adminToken = localStorage.getItem('adminToken');
+  const adminToken = localStorage.getItem('adminToken') ?? '';
 
   const handleAddToCart = (book: Book, quantity: number) => {
     dispatch(addToCart({ id: book.id, bookName: book.bookName, quantity }));
@@ -35,11 +34,9 @@ const Books: React.FC = () => {
 
   const handleDelete = async (bookId: number) => {
     try {
-      const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/adminBooks/delete/${bookId}`, {
-        headers: { Authorization: `Bearer ${adminToken}` },
-      });
+      const response = await remove(`/adminBooks/delete/${bookId}`, adminToken);
 
-      if (response.data.success) {
+      if (response.success) {
         console.log('Book deleted successfully');
         fetchBooks();
       } else {
@@ -52,24 +49,18 @@ const Books: React.FC = () => {
   
   const fetchBooks = React.useCallback(async () => {
     try {
-      const headers = adminToken ? { Authorization: `Bearer ${adminToken}` }: { Authorization: `Bearer ${token}` };
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/books`, {
-        headers,
-      });
-      setBooks(response.data?.books || []);
+      const authToken = adminToken ? `Bearer ${adminToken}` : '';
+      const response = await get('/books', authToken);
+      setBooks(response?.books || []);
       console.log('fetching books');
     } catch (error) {
       console.error('Error fetching books:', error);
     }
-  }, [adminToken, token, setBooks]);
+  }, [adminToken, setBooks]);
 
   useEffect(() => {
-    if (!token && !adminToken) {
-      navigate('/login');
-    } else {
       fetchBooks(); 
-    }
-  }, [navigate, token,adminToken,fetchBooks]);
+  }, [navigate, fetchBooks]);
 
   return (
     <div>
